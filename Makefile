@@ -37,7 +37,7 @@ FILES_ST			:= stack.cpp
 FILES_SE			:= set.cpp
 FILES_V				:= vector.cpp
 FILES_M				:= map.cpp
-FILES_T				:= tools.cpp
+FILES_T				:= tools.cpp iterator.cpp
 
 FILES				= ${addprefix ${PATH_ST}/, ${FILES_ST}} \
 					${addprefix ${PATH_SE}/, ${FILES_SE}} \
@@ -52,7 +52,7 @@ OBJS				:= ${SRCS:.cpp=.o}
 
 # ******************************   INCLUDE   ********************************* #
 
-HEADERS				:= stack.hpp set.hpp vector.hpp map.hpp tools.hpp
+HEADERS				:= stack.hpp set.hpp vector.hpp map.hpp iterator.hpp tools.hpp
 INCS				:= ${addprefix ${PATH_I}/, ${HEADERS}}
 
 
