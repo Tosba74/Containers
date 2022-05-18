@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 14:29:08 by bmangin           #+#    #+#              #
-#    Updated: 2022/05/18 00:39:29 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/05/16 21:56:54 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,27 +28,44 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_ST}} \
 					${addprefix ${PATH_S}/, ${PATH_V}} \
 					${addprefix ${PATH_S}/, ${PATH_M}} \
 					${addprefix ${PATH_S}/, ${PATH_T}} \
-					${PATH_S}
+					${PATH_S} ${PATH_I}
 
 
 # *******************************   FILES   ********************************** #
 
-FILES_S				:= main
-FILES_T				:= iterator iterators_traits reverse_iterator
-FILES				:= ${addprefix ${PATH_ST}/, ${PATH_ST}} \
-					${addprefix ${PATH_SE}/, ${PATH_SE}} \
-					${addprefix ${PATH_V}/, ${PATH_V}} \
-					${addprefix ${PATH_M}/, ${PATH_M}} \
-					${addprefix ${PATH_T}/, ${FILES_T}} 
+FILES_S				:= main.cpp
+FILES_ST			:= ${addsuffix .cpp, ${PATH_ST}}
+FILES_SE			:= ${addsuffix .cpp, ${PATH_SE}}
+FILES_V				:= ${addsuffix .cpp, ${PATH_V}}
+FILES_M				:= ${addsuffix .cpp, ${PATH_M}}
+FILES_T				:= iterator.cpp iterators_traits.cpp reverse_iterator.cpp
 
-ALL_FILES			= ${FILES} ${FILES_S}
+FILES				= ${addprefix ${PATH_ST}/, ${FILES_ST}} \
+					${addprefix ${PATH_SE}/, ${FILES_SE}} \
+					${addprefix ${PATH_V}/, ${FILES_V}} \
+					${addprefix ${PATH_M}/, ${FILES_M}} \
+					${addprefix ${PATH_T}/, ${FILES_T}} \
+					${FILES_S}
 
-SRCS				:= ${addprefix ${PATH_S}/, ${addsuffix .cpp, ${FILES}}}
+SRCS				:= ${addprefix ${PATH_S}/, ${FILES}}
 OBJS				:= ${SRCS:.cpp=.o}
+
 
 # ******************************   INCLUDE   ********************************* #
 
-INCS				:= ${addprefix ${PATH_I}/, ${addsuffix .hpp, ${FILES}}}
+HEADER_ST			:= ${addsuffix .hpp, ${PATH_ST}}
+HEADER_SE			:= ${addsuffix .hpp, ${PATH_SE}}
+HEADER_V			:= ${addsuffix .hpp, ${PATH_V}}
+HEADER_M			:= ${addsuffix .hpp, ${PATH_M}}
+HEADER_T			:= iterator.hpp iterators_traits.hpp reverse_iterator.hpp
+
+HEADERS				= ${addprefix ${PATH_ST}/, ${HEADER_ST}} \
+					${addprefix ${PATH_SE}/, ${HEADER_SE}} \
+					${addprefix ${PATH_V}/, ${HEADER_V}} \
+					${addprefix ${PATH_M}/, ${HEADER_M}} \
+					${addprefix ${PATH_T}/, ${HEADER_T}}
+
+INCS				:= ${addprefix ${PATH_I}/, ${HEADERS}}
 
 
 # *****************************   COMMANDES   ******************************** #
