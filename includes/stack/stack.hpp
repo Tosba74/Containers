@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:20:16 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/15 17:31:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 22:23:18 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 #include <iostream>
 #include <vector>
-#include "vector.hpp"
+#include "vector/vector.hpp"
 
 
 namespace ft {
 	// template <class T, class Container = ft::vector<T> >
 	template <class T, class Container = std::vector<T>>
-	class stack
-	{
+	class stack {
 
 		protected:
 			Container			c;
@@ -35,11 +34,9 @@ namespace ft {
 			typedef typename container_type::const_reference	const_reference;
 			typedef typename container_type::reference			reference;
 
-
 /* --------------------------   CONSTRUCTEUR   ---------------------------- */
 
 			explicit stack (const container_type& ctnr = container_type()) : Container(ctnr) {};
-			// stack(){};
 
 /* --------------------------   DESTRUCTEUR   ----------------------------- */
 

@@ -10,5 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+<<<<<<< Updated upstream
 #include "iterator.hpp"
 #include <iterator>
+=======
+#include "tools/iterator.hpp"
+>>>>>>> Stashed changes

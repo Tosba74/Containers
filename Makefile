@@ -55,14 +55,23 @@ INCS				:= ${addprefix ${PATH_I}/, ${addsuffix .hpp, ${FILES}}}
 
 CC					:= c++
 FLAGS				:= -Werror -Wall -Wextra -std=c++98
-CCF					:= ${CC} ${FLAGS} -I${PATH_I}
+CCF					:= ${CC} ${FLAGS} -I ${PATH_I}/
+# CCF					:= ${CC} ${FLAGS} -I${INCS}
 
 RM					:= rm -rf
 
 # *****************************   MAKE SHIT   ******************************** #
 
-all:	crea_b ${NAME}
+# all:	crea_b ${NAME}
+all:	see_more crea_b ${NAME}
 	
+see_more:
+	echo ${CCF} ${FILES}"\033[0m"
+	echo "srcs:"
+	echo ${SRCS}
+	echo "includes:"
+	echo ${INCS}
+
 ${PATH_B}/%.o: %.cpp ${HEADER}
 	$(CCF) -o $@ -c $<
 
