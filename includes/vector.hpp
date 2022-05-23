@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:36:13 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/20 21:35:04 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 17:06:20 by bmangin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+
+#include <iostream>
 
 namespace ft
 {
@@ -24,11 +26,12 @@ namespace ft
 		class vector_iterator_const
 		{
 			public:
-				typedef typename std::ptrdiff_t difference_type;
-				typedef T value_type;
-				typedef const T *pointer;
-				typedef const T &reference;
-				typedef random_access_iterator_tag iterator_category;
+				typedef typename std::ptrdiff_t		difference_type;
+				typedef T							value_type;
+				typedef const T						*pointer;
+				typedef const T						&reference;
+				typedef random_access_iterator_tag	iterator_category;
+
 			protected:
 				value_type	*current;
 
@@ -59,7 +62,7 @@ namespace ft
 
 /* ------------------------   MEMBER FUNCTIONS   -------------------------- */
 
-			size_type			size() const {return c.size();};
+			Container::size_type			size() const {return c.size();};
 			size_type			max_size() const {return c.max_size();};
 			void				resize(size_type n, value_type val = value_type()) {c.resize(n, val);}; //hien?
 			size_type			capacity() const {return c.capacity();};
@@ -82,6 +85,8 @@ namespace ft
 			template < class InputIterator >
 			void			assign(InputIterator first, InputIterator last){c.assign(first, last);};
 			void			assign(size_type n, const value_type& val) {c.assign(n, val);};
+			
+/*
 	Iterators:
 	Capacity:
 	Element access:
@@ -105,7 +110,8 @@ namespace ft
 	Construct and insert element (public member function )
 	emplace_back 
 	Construct and insert element at the end (public member function )
-	
+*/
+
 /* ---------------------------   ALLOCATOR   ------------------------------ */
 
 	Allocator:

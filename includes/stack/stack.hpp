@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:20:16 by bmangin           #+#    #+#             */
-/*   Updated: 2022/03/25 22:23:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 16:57:42 by bmangin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 namespace ft {
 	// template <class T, class Container = ft::vector<T> >
-	template <class T, class Container = std::vector<T>>
+	template < class T, class Container = std::vector< T > >
 	class stack {
 
 		protected:
@@ -29,14 +29,14 @@ namespace ft {
 
 /* -----------------------------   TYPEDEF   ------------------------------- */
 
-			typedef typename container_type::value_type			value_type;
-			typedef typename container_type::size_type			size_type;
-			typedef typename container_type::const_reference	const_reference;
-			typedef typename container_type::reference			reference;
+			typedef typename Container::value_type			value_type;
+			typedef typename Container::size_type			size_type;
+			typedef typename Container::const_reference	const_reference;
+			typedef typename Container::reference			reference;
 
 /* --------------------------   CONSTRUCTEUR   ---------------------------- */
 
-			explicit stack (const container_type& ctnr = container_type()) : Container(ctnr) {};
+			explicit stack (const Container& ctnr = Container()) : Container(ctnr) {};
 
 /* --------------------------   DESTRUCTEUR   ----------------------------- */
 
@@ -53,30 +53,30 @@ namespace ft {
 
 /* -----------------------   OPERATOR FUNCTIONS   ------------------------- */
 
-			friend bool operator==(const stack<T, container_type> & lhs, const stack<T, container_type> & rhs)
+			friend bool operator==(const stack<T, Container> & lhs, const stack<T, Container> & rhs)
 			{
 				return (lhs.c == rhs.c);
 			}
-			friend bool operator!=(const stack<T, container_type>& lhs, const stack<T, container_type>& rhs)
+			friend bool operator!=(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
 			{
 				return (lhs.c != rhs.c);
 			}
-			friend bool operator<(const stack<T, container_type>& lhs, const stack<T, container_type>& rhs)
+			friend bool operator<(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
 			{
 				return (lhs.c < rhs.c);
 			}
 
-			friend bool operator<=(const stack<T, container_type>& lhs, const stack<T, container_type>& rhs)
+			friend bool operator<=(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
 			{
 				return (lhs.c <= rhs.c);
 			}
 
-			friend bool operator>(const stack<T, container_type>& lhs, const stack<T, container_type>& rhs)
+			friend bool operator>(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
 			{
 				return (lhs.c > rhs.c);
 			}
 
-			friend bool operator>=(const stack<T, container_type>& lhs, const stack<T, container_type>& rhs)	
+			friend bool operator>=(const stack<T, Container>& lhs, const stack<T, Container>& rhs)	
 			{
 				return (lhs.c >= rhs.c);
 			}

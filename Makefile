@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: bmangin <bmangin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 14:29:08 by bmangin           #+#    #+#              #
-#    Updated: 2022/05/18 00:39:29 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/05/23 16:50:31 by bmangin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,13 @@ FILES				:= ${addprefix ${PATH_ST}/, ${PATH_ST}} \
 
 ALL_FILES			= ${FILES} ${FILES_S}
 
-SRCS				:= ${addprefix ${PATH_S}/, ${addsuffix .cpp, ${FILES}}}
-OBJS				:= ${SRCS:.cpp=.o}
+SRCS				:= ${addprefix ${PATH_S}/, ${addsuffix .cpp, ${ALL_FILES}}}
+OBJS				:= ${addprefix ${PATH_B}/, ${notdir ${SRCS:.cpp=.o}}}
 
 # ******************************   INCLUDE   ********************************* #
 
+# INCS				:= ${addsuffix .hpp, ${FILES}}
+# INC					:= ${addprefix ${PATH_I}/, ${INCS}}
 INCS				:= ${addprefix ${PATH_I}/, ${addsuffix .hpp, ${FILES}}}
 
 
@@ -55,7 +57,8 @@ INCS				:= ${addprefix ${PATH_I}/, ${addsuffix .hpp, ${FILES}}}
 
 CC					:= c++
 FLAGS				:= -Werror -Wall -Wextra -std=c++98
-CCF					:= ${CC} ${FLAGS} -I ${PATH_I}/
+INC					:= -I${PATH_I}
+CCF					:= ${CC} ${FLAGS} ${INC}
 # CCF					:= ${CC} ${FLAGS} -I${INCS}
 
 RM					:= rm -rf
@@ -66,21 +69,20 @@ RM					:= rm -rf
 all:	see_more crea_b ${NAME}
 	
 see_more:
-	echo ${CCF} ${FILES}"\033[0m"
-	echo "srcs:"
-	echo ${SRCS}
-	echo "includes:"
-	echo ${INCS}
-
-${PATH_B}/%.o: %.cpp ${HEADER}
-	$(CCF) -o $@ -c $<
-
-${NAME}: ${OBJS}
-	${CCF} -o ${NAME} ${OBJS}
+	# echo ${CCF} ${SRCS}
+	# echo "srcs:"
+	# echo ${OBJS}
+	# echo "includes:"
+	# echo ${INCS}
 
 crea_b:
 	${shell mkdir -p ${PATH_B}}	
 
+$(NAME): $(OBJS)
+	$(CCF) -o $(NAME) $(OBJS)
+
+${PATH_B}/%.o: %.cpp ${INCS}
+	$(CCF) -o $@ -c $<
 
 clean:
 	${RM} ${PATH_B}
