@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 13:55:17 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/16 21:23:21 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 11:25:46 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ namespace ft
 	
 /* -----------------------------   TEMPLATE   ----------------------------- */
 
-	template<class Category, class T, class Distance =long, class Pointer = T*, class Reference =T&> struct	base_iterator;
+	template<class Category, class T, class Distance =long, class Pointer = T*,
+		class Reference =T&> struct	base_iterator;
+	
 	template <class iterator> class	reverse_iterator;
 
 /* ------------------------   MEMBER FUNCTIONS   -------------------------- */
