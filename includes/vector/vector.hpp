@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:36:13 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/30 17:04:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/05/30 19:33:59 by bmangin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ namespace ft
 			{
 				public:
 					//TYPEDEF
-					typedef ptrdiff_t							difference_type;
 					typedef T									value_type;
 					typedef value_type*							pointer;
 					typedef value_type&							reference;
+					typedef ptrdiff_t							difference_type;
 					typedef ft::random_access_iterator_tag		iterator_category;
 	
 				protected:
@@ -91,7 +91,7 @@ namespace ft
 					}
 	
 					iterator					operator++(int) {
-						iterator cpy(*this);
+						iterator	cpy(*this);
 						++_value;
 						return cpy;
 					}
@@ -101,7 +101,7 @@ namespace ft
 					}
 	
 					iterator					operator--(int) {
-						iterator cpy(*this);
+						iterator	cpy(*this);
 						--_value;
 						return cpy;
 					}
