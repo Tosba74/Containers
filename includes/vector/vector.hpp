@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:36:13 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/30 19:33:59 by bmangin          ###   ########.fr       */
+/*   Updated: 2022/05/30 20:45:57 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,10 +231,9 @@ namespace ft
 
 			~vector() {
 				if (_array) {
-					_array = _alloc.deallocate(_array, _capacity);
-					_array = _alloc.destroy(_array, _capacity);
+					clear();
+					_alloc.deallocate(_array, _capacity);
 					_capacity = 0;
-					_size = 0;
 				}
 			};
 
@@ -281,7 +280,7 @@ namespace ft
 					if (n > capacity())
 					{
 						if (!_capacity) {
-							_array = _alloc.allocate(n, _array);
+							_alloc.allocate(n, _array);
 							_capacity = n;
 						}
 						else
@@ -289,7 +288,7 @@ namespace ft
 							value_type	*tmp = _alloc.allocate(n, _array);
 							for (size_type i = 0; i < _size; i++)
 								tmp[i] = _array[i];
-							_array = _alloc.deallocate(_array, _capacity);
+							_alloc.deallocate(_array, _capacity);
 							_array = tmp;
 							_capacity = n;
 						}
@@ -373,8 +372,8 @@ namespace ft
 					swap(tmp);
 				}
 			}
-			template <class InputIterator>
-			void insert (iterator position, InputIterator first, InputIterator last) {
+			template < class InputIterator >
+			void insert (iterator position, enable_if < is_iterator < InputIterator >::value >::type first, enable_if < is_iterator < InputIterator >::value >::type last) {
 				vector tmp;
 				iterator it = begin();
 				if(begin() != NULL)
@@ -414,7 +413,7 @@ namespace ft
 				return last;
 			}
 			void swap (vector& x) {
-				if (this != x) {
+				if (this != &x) {
 					swap(_capacity, x._capacity);
 					swap(_size, x._size);
 					swap(_alloc, x._alloc);
@@ -432,4 +431,15 @@ namespace ft
 			allocator_type	get_allocator() const { return (_alloc); }
 	};
 //  -----------------------   NON-MEMBER FUNC   --------------------------- ##
+	template < class T, class Alloc >
+	bool	operator!=(const vector < T, Alloc >& lhs, const vector < T, Alloc >& rhs) { return (!(lhs == rhs)); }
+	template < class T, class Alloc >
+	bool	operator==(const vector < T, Alloc >& lhs, const vector < T, Alloc >& rhs) {
+		if (lhs == rhs)
+			return false;
+		for (typename ft::vector < T, Alloc >::size_type i = 0; i != lhs.size(); ++i)
+			if (lhs[i] != lhs[i])
+				return false;
+		return true;
+	}
 }
