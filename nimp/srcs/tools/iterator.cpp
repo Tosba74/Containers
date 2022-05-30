@@ -1,13 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.cpp                                          :+:      :+:    :+:   */
+/*   iterator.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 23:15:38 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/30 15:35:55 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2022/05/14 13:47:18 by bmangin           #+#    #+#             */
+/*   Updated: 2022/05/19 11:23:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack/stack.hpp"
+<<<<<<< Updated upstream
+#include "iterator.hpp"
+#include <iterator>
+=======
+#include "tools/iterator.hpp"
+>>>>>>> Stashed changes

@@ -3,7 +3,12 @@
 		"iterator": "cpp",
 		"type_traits": "cpp",
 		"__functional_03": "cpp",
-		"functional": "cpp"
+		"functional": "cpp",
+		"deque": "cpp",
+		"vector": "cpp",
+		"__string": "cpp",
+		"string": "cpp",
+		"system_error": "cpp"
 	},
 	"C_Cpp.intelliSenseEngineFallback": "Enabled"
 }

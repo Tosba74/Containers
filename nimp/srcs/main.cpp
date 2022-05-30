@@ -1,72 +1,19 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 0 //CREATE A REAL STL EXAMPLE
+#if 1 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
 	namespace ft = std;
 #else
-	#include <map/map.hpp>
-	#include <stack/stack.hpp>
-	#include <vector/vector.hpp>
+	#include <map.hpp>
+	#include <stack.hpp>
+	#include <vector.hpp>
 #endif
 
 #include <stdlib.h>
 
-std::ostream&	operator<<(std::ostream& o, ft::vector<int> const& v)
-{
-	o << "[ ";
-	for (ft::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it)
-		o << *it << " ";
-	o << "]" << std::endl;
-	return o;
-}
-
-int main(void)
-{
-	ft::vector<int>	vect;
-	ft::vector<int>	vect2;
-	
-	vect2.insert(vect2.begin(), 5);
-	vect2.insert(vect2.begin(), 4);
-	vect2.insert(vect2.begin(), 3);
-	vect2.insert(vect2.begin(), 2);
-	vect2.insert(vect2.begin(), 1);
-
-	std::cout << "*-+-+-*" << std::endl;
-	std::cout << "|E|C|S|" << std::endl;
-	std::cout << "|M|A|I|" << std::endl;
-	std::cout << "|P|P|Z|		VECTOR		|" << std::endl;
-	std::cout << "|T|A|E|" << std::endl;
-	std::cout << "|Y|C| |" << std::endl;
-	std::cout << "*-+-+-*" << std::endl;
-
-
-	std::cout << "|" << vect.empty() << "|" << vect.capacity() << "|" << vect.size() << "|	" << vect;
-	std::cout << "INSERT" << std::endl;
-	vect.insert(vect.begin(), 1);
-	std::cout << "|" << vect.empty() << "|" << vect.capacity() << "|" << vect.size() << "|	" << vect;
-	std::cout << "PUSHBACK" << std::endl;
-	vect.push_back(2);
-	std::cout << "|" << vect.empty() << "|" << vect.capacity() << "|" << vect.size() << "|	" << vect;
-	std::cout << "INSERT" << std::endl;
-	vect.insert(vect.begin(), 2);
-	std::cout << "|" << vect.empty() << "|" << vect.capacity() << "|" << vect.size() << "|	" << vect;
-	std::cout << "SWAP" << std::endl;
-	vect.swap(vect2);
-	std::cout << "|" << vect.empty() << "|" << vect.capacity() << "|" << vect.size() << "|	" << vect;
-	std::cout << "EMPLACE_BACK" << std::endl;
-	// vect.emplace_back(5);
-	std::cout << "|" << vect.empty() << "|" << vect.capacity() << "|" << vect.size() << "|	" << vect;
-	std::cout << "CLEAR" << std::endl;
-	vect.clear();
-	std::cout << "|" << vect.empty() << "|" << vect.capacity() << "|" << vect.size() << "|	" << vect;
-	
-
-	return 0;
-}
-/*
 #define MAX_RAM 4294967296
 #define BUFFER_SIZE 4096
 struct Buffer
@@ -167,4 +114,3 @@ int main(int argc, char** argv) {
 	std::cout << std::endl;
 	return (0);
 }
-*/
