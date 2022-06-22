@@ -13,7 +13,7 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
+// #include <vector>
 #include "vector/vector.hpp"
 
 /* **************************   VECTOR SYNOPSIS   *************************** */

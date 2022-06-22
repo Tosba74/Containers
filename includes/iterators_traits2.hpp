@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterators_traits.hpp                               :+:      :+:    :+:   */
+/*   iterators_traits2.hpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 13:55:17 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/19 11:25:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 00:30:41 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <cstddef>
 #include <memory>
 #include <stdexcept>
+
+#include "tools/iterator.hpp"
+#include "tools/reverse_iterator.hpp"
 
 namespace ft
 {

@@ -66,7 +66,6 @@ int main(void)
 	std::cout << "|" << myvector.empty() << "|" << myvector.capacity() << "|" << myvector.size() << "|	" << myvector;
 	myvector.resize(12);
 	std::cout << "|" << myvector.empty() << "|" << myvector.capacity() << "|" << myvector.size() << "|	" << myvector;
-
 /*
 */	
 

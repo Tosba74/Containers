@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 14:29:08 by bmangin           #+#    #+#              #
-#    Updated: 2022/05/30 20:35:17 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/06/11 03:55:54 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ override PATH_ST	:= stack
 override PATH_SE	:= set
 override PATH_V		:= vector
 override PATH_M		:= map
-override PATH_T		:= tools
+override PATH_TOOL	:= tools
+override PATH_TEST	:= test
 override PATH_I		:= includes
 override PATH_B		:= .bin
 
@@ -27,19 +28,23 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_ST}} \
 					${addprefix ${PATH_S}/, ${PATH_SE}} \
 					${addprefix ${PATH_S}/, ${PATH_V}} \
 					${addprefix ${PATH_S}/, ${PATH_M}} \
-					${addprefix ${PATH_S}/, ${PATH_T}} \
+					${addprefix ${PATH_S}/, ${PATH_TOOL}} \
 					${PATH_S}
+# ${addprefix ${PATH_S}/, ${PATH_TEST}}
 
 
 # *******************************   FILES   ********************************** #
 
 FILES_S				:= main
-FILES_T				:= iterator iterator_traits reverse_iterator enable_if
+FILES_TOOL			:= iterator reverse_iterator enable_if is_integral 
+#FILES_TOOL			:= iterator enable_if is_integral iterator_traits reverse_iterator enable_if is_integral
+# FILES_TEST			:= 
 FILES				:= ${addprefix ${PATH_ST}/, ${PATH_ST}} \
 					${addprefix ${PATH_SE}/, ${PATH_SE}} \
 					${addprefix ${PATH_V}/, ${PATH_V}} \
 					${addprefix ${PATH_M}/, ${PATH_M}} \
-					${addprefix ${PATH_T}/, ${FILES_T}} 
+					${addprefix ${PATH_TOOL}/, ${FILES_TOOL}} 
+# ${addprefix ${PATH_TEST/, ${FILES_TEST}} 
 
 ALL_FILES			= ${FILES} ${FILES_S}
 
@@ -56,10 +61,11 @@ INCS				:= ${addprefix ${PATH_I}/, ${addsuffix .hpp, ${FILES}}}
 # *****************************   COMMANDES   ******************************** #
 
 CC					:= c++
-FLAGS				:= -Werror -Wall -Wextra -std=c++98
+FLAGS				:= -Werror -Wall -Wextra# -std=c++98
 INC					:= -I${PATH_I}
 CCF					:= ${CC} ${FLAGS} ${INC}
-# CCF					:= ${CC} ${FLAGS} -I${INCS}
+FS					:= -g3 -fsanitize=address 
+CCFS				:= ${CC} ${FLAGS} ${INC} ${FS}
 
 RM					:= rm -rf
 
@@ -78,16 +84,21 @@ see_more:
 crea_b:
 	${shell mkdir -p ${PATH_B}}	
 
-$(NAME): $(OBJS)
-	$(CCF) -o $(NAME) $(OBJS)
+${NAME}: ${OBJS}
+	${CCF} -o ${NAME} ${OBJS}
 
+fs: ${OBJS}
+	${CCFS} -o ${NAME} ${OBJS}
+	
 ${PATH_B}/%.o: %.cpp ${INCS}
-	$(CCF) -o $@ -c $<
+	${CCF} -o $@ -c $<
 
 clean:
 	${RM} ${PATH_B}
 
 fclean: clean
+
+seg: fclean fs
 
 re: fclean all
 

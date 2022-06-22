@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:35:31 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/23 14:36:17 by bmangin          ###   ########.fr       */
+/*   Updated: 2022/06/22 18:38:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#include "iterator_traits.hpp"
 
-#include "tools/iterator_traits.hpp"
-
-template < class Category, class T, class Distance, class Pointer, class Reference >
+template<class Category, class T, class Distance, class Pointer, class Reference>
 struct ft::base_iterator
 {
 	typedef T			value_type;
