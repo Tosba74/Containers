@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:47:11 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/20 03:33:21 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/08/20 03:34:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ namespace ft {
 		
 		//OPERATEUR
 			node*	operator=(node const& cpy){
-				pair = cpy.pair
-				color = cpy.color
-				parent = cpy.parent
-				left = cpy.left
-				right = cpy.right
+				pair = cpy.pair;
+				color = cpy.color;
+				parent = cpy.parent;
+				left = cpy.left;
+				right = cpy.right;
 				return *this;
 			}
 		
