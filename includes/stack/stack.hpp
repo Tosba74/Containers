@@ -5,220 +5,136 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 22:20:16 by bmangin           #+#    #+#             */
-/*   Updated: 2022/05/26 20:28:31by bmangin          ###   ########lyon.fr   */
+/*   Created: 2022/08/20 01:30:47 by bmangin           #+#    #+#             */
+/*   Updated: 2022/08/20 02:40:24 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <cmath>
 #include <iostream>
-// #include <vector>
+#include <string>
+
 #include "vector/vector.hpp"
 
-/* **************************   VECTOR SYNOPSIS   *************************** */
-/*
-namespace std
+namespace ft {
+template < class T, class Container = ft::vector<T> >
+class stack
 {
-	template <class T, class Allocator = allocator<T> >
-	class vector
-	{
-		public:
-		    typedef T                                        value_type;
-		    typedef Allocator                                allocator_type;
-		    typedef typename allocator_type::reference       reference;
-		    typedef typename allocator_type::const_reference const_reference;
-		    typedef implementation-defined                   iterator;
-		    typedef implementation-defined                   const_iterator;
-		    typedef typename allocator_type::size_type       size_type;
-		    typedef typename allocator_type::difference_type difference_type;
-		    typedef typename allocator_type::pointer         pointer;
-		    typedef typename allocator_type::const_pointer   const_pointer;
-		    typedef std::reverse_iterator<iterator>          reverse_iterator;
-		    typedef std::reverse_iterator<const_iterator>    const_reverse_iterator;
+	public :
 
-		    vector()
-		        noexcept(is_nothrow_default_constructible<allocator_type>::value);
-		    explicit vector(const allocator_type&);
-		    explicit vector(size_type n);
-		    explicit vector(size_type n, const allocator_type&); // C++14
-		    vector(size_type n, const value_type& value, const allocator_type& = allocator_type());
-		    template <class InputIterator>
-		        vector(InputIterator first, InputIterator last, const allocator_type& = allocator_type());
-		    vector(const vector& x);
-		    vector(vector&& x)
-		        noexcept(is_nothrow_move_constructible<allocator_type>::value);
-		    vector(initializer_list<value_type> il);
-		    vector(initializer_list<value_type> il, const allocator_type& a);
-		    ~vector();
-		    vector& operator=(const vector& x);
-		    vector& operator=(vector&& x)
-		        noexcept(
-		             allocator_type::propagate_on_container_move_assignment::value ||
-		             allocator_type::is_always_equal::value); // C++17
-		    vector& operator=(initializer_list<value_type> il);
-		    template <class InputIterator>
-		        void assign(InputIterator first, InputIterator last);
-		    void assign(size_type n, const value_type& u);
-		    void assign(initializer_list<value_type> il);
+		typedef Container								container_type;
+		typedef typename Container::value_type			value_type;
+		typedef typename Container::size_type			size_type;
+		typedef typename Container::reference			reference;
+		typedef typename Container::const_reference		const_reference;
 
-		    allocator_type get_allocator() const noexcept;
+	protected:
+		Container	_c;
 
-		    iterator               begin() noexcept;
-		    const_iterator         begin()   const noexcept;
-		    iterator               end() noexcept;
-		    const_iterator         end()     const noexcept;
+	public :
+		explicit stack(const Container& container = Container()) : _c(container) {}
+		stack(const stack& other) {
+			_c = other._c;
+		}
+		~stack() {}
 
-		    reverse_iterator       rbegin() noexcept;
-		    const_reverse_iterator rbegin()  const noexcept;
-		    reverse_iterator       rend() noexcept;
-		    const_reverse_iterator rend()    const noexcept;
+		stack& operator=( const stack& rhs ) {
+			_c = rhs._c;
+			return *this;
+		}
 
-		    const_iterator         cbegin()  const noexcept;
-		    const_iterator         cend()    const noexcept;
-		    const_reverse_iterator crbegin() const noexcept;
-		    const_reverse_iterator crend()   const noexcept;
+		reference top() {
+			return _c.back();
+		}
+		const_reference top() const {
+			return _c.back();
+		}
 
-		    size_type size() const noexcept;
-		    size_type max_size() const noexcept;
-		    size_type capacity() const noexcept;
-		    bool empty() const noexcept;
-		    void reserve(size_type n);
-		    void shrink_to_fit() noexcept;
+		bool empty() const {
+			return _c.empty();
+		}
+		size_type size() const {
+			return _c.size();
+		}
+		void push( const value_type& value ) {
+			_c.push_back(value);
+		}
+		void pop() {
+			_c.pop_back();
+		}
 
-		    reference       operator[](size_type n);
-		    const_reference operator[](size_type n) const;
-		    reference       at(size_type n);
-		    const_reference at(size_type n) const;
+		friend bool operator==( const stack<T,Container>& lhs, const stack<T,Container>& rhs ) {
+			return (lhs._c == rhs._c);
+		}
+		friend bool operator!=( const stack<T,Container>& lhs, const stack<T,Container>& rhs ) {
+			return (lhs._c != rhs._c);
+		}
+		friend bool operator<( const stack<T,Container>& lhs, const stack<T,Container>& rhs ) {
+			return (lhs._c < rhs._c);
+		}
+		friend bool operator<=( const stack<T,Container>& lhs, const stack<T,Container>& rhs ) {
+			return (lhs._c <= rhs._c);
+		}
+		friend bool operator>( const stack<T,Container>& lhs, const stack<T,Container>& rhs ) {
+			return (lhs._c > rhs._c);
+		}
+		friend bool operator>=( const stack<T,Container>& lhs, const stack<T,Container>& rhs ) {
+			return (lhs._c >= rhs._c);
+		}
 
-		    reference       front();
-		    const_reference front() const;
-		    reference       back();
-		    const_reference back() const;
-
-		    value_type*       data() noexcept;
-		    const value_type* data() const noexcept;
-
-		    void push_back(const value_type& x);
-		    void push_back(value_type&& x);
-		    template <class... Args>
-		        reference emplace_back(Args&&... args); // reference in C++17
-		    void pop_back();
-
-		    template <class... Args> iterator emplace(const_iterator position, Args&&... args);
-		    iterator insert(const_iterator position, const value_type& x);
-		    iterator insert(const_iterator position, value_type&& x);
-		    iterator insert(const_iterator position, size_type n, const value_type& x);
-		    template <class InputIterator>
-		        iterator insert(const_iterator position, InputIterator first, InputIterator last);
-		    iterator insert(const_iterator position, initializer_list<value_type> il);
-
-		    iterator erase(const_iterator position);
-		    iterator erase(const_iterator first, const_iterator last);
-
-		    void clear() noexcept;
-
-		    void resize(size_type sz);
-		    void resize(size_type sz, const value_type& c);
-
-		    void swap(vector&)
-		        noexcept(allocator_traits<allocator_type>::propagate_on_container_swap::value ||
-		                 allocator_traits<allocator_type>::is_always_equal::value);  // C++17
-
- 		   bool __invariants() const;
 };
 
-template <class InputIterator, class Allocator = allocator<typename iterator_traits<InputIterator>::value_type>>
-   vector(InputIterator, InputIterator, Allocator = Allocator())
-   -> vector<typename iterator_traits<InputIterator>::value_type, Allocator>;
-
-template <class Allocator> struct hash<std::vector<bool, Allocator>>;
-
-template <class T, class Allocator> bool operator==(const vector<T,Allocator>& x, const vector<T,Allocator>& y);
-template <class T, class Allocator> bool operator< (const vector<T,Allocator>& x, const vector<T,Allocator>& y);
-template <class T, class Allocator> bool operator!=(const vector<T,Allocator>& x, const vector<T,Allocator>& y);
-template <class T, class Allocator> bool operator> (const vector<T,Allocator>& x, const vector<T,Allocator>& y);
-template <class T, class Allocator> bool operator>=(const vector<T,Allocator>& x, const vector<T,Allocator>& y);
-template <class T, class Allocator> bool operator<=(const vector<T,Allocator>& x, const vector<T,Allocator>& y);
-
-template <class T, class Allocator>
-void swap(vector<T,Allocator>& x, vector<T,Allocator>& y)
-    noexcept(noexcept(x.swap(y)));
-
-template <class T, class Allocator, class U>
-    void erase(vector<T, Allocator>& c, const U& value);       // C++20
-template <class T, class Allocator, class Predicate>
-    void erase_if(vector<T, Allocator>& c, Predicate pred);    // C++20
-
-}  // std
-*/
-
-
-
 /*
-namespace ft {
-	// template <class T, class Container = ft::vector<T> >
-	template < class T, class Container = std::vector< T > >
-	class stack
-	{
+	template <class T, class container_type = ft::vector<T> >
+	class stack {
 		protected:
-			Container			c;
-		
+			container_type c;
 		public:
-
-// -----------------------------   TYPEDEF   ------------------------------- //
-
-			typedef typename Container::value_type			value_type;
-			typedef typename Container::size_type			size_type;
-			typedef typename Container::const_reference	const_reference;
-			typedef typename Container::reference			reference;
-
-// --------------------------   CONSTRUCTEUR   ---------------------------- //
-
-			explicit stack (const Container& ctnr = Container()) : Container(ctnr) {};
-
-// --------------------------   DESTRUCTEUR   ----------------------------- //
-
-			~stack(){};
+			typedef typename container_type::iterator iterator;
+			typedef typename container_type::const_iterator const_iterator;
+			typedef typename container_type::reverse_iterator reverse_iterator;
+			typedef typename container_type::const_reverse_iterator const_reverse_iterator;
+			typedef typename container_type::value_type value_type;
+			typedef typename container_type::reference reference;
+			typedef typename container_type::const_reference const_reference;
+			typedef typename container_type::size_type size_type;
+			typedef typename container_type::difference_type difference_type;
+			typedef typename container_type::pointer pointer;
+			typedef typename container_type::const_pointer const_pointer;
 			
-// ------------------------   MEMBER FUNCTIONS   -------------------------- //
-
-			bool				empty() const {return c.empty();};
-			size_type			size() const {return c.size();};
-			value_type &		top() {return c.back();};
-			const value_type &	top() const {return c.back();};
-			void 				push(const value_type & val) {this->c.push_back(val);};
-			void				pop() {this->c.pop_back();};
-
-// -----------------------   OPERATOR FUNCTIONS   ------------------------- //
-
-			friend bool operator==(const stack<T, Container> & lhs, const stack<T, Container> & rhs)
-			{
-				return (lhs.c == rhs.c);
-			}
-			friend bool operator!=(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
-			{
-				return (lhs.c != rhs.c);
-			}
-			friend bool operator<(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
-			{
-				return (lhs.c < rhs.c);
-			}
-
-			friend bool operator<=(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
-			{
-				return (lhs.c <= rhs.c);
-			}
-
-			friend bool operator>(const stack<T, Container>& lhs, const stack<T, Container>& rhs)
-			{
-				return (lhs.c > rhs.c);
-			}
-
-			friend bool operator>=(const stack<T, Container>& lhs, const stack<T, Container>& rhs)	
-			{
-				return (lhs.c >= rhs.c);
-			}
+			explicit stack(const container_type& container = container_type()) : c(container) {}	
+			// stack() : c() {};
+			stack(const stack& other) : c(other.c) {};
+			stack& operator=(const stack& other) {
+				c = other.c;
+				return *this;
+			};
+	
+			iterator begin() { return c.begin(); };
+			iterator end() { return c.end(); };
+			const_iterator begin() const { return c.begin(); };
+			const_iterator end() const { return c.end(); };
+			reverse_iterator rbegin() { return c.rbegin(); };
+			reverse_iterator rend() { return c.rend(); };
+			const_reverse_iterator rbegin() const { return c.rbegin(); };
+			const_reverse_iterator rend() const { return c.rend(); };
+	
+			bool empty() const { return c.empty(); };
+			size_type size()  { return c.size(); };
+			size_type max_size() const { return c.max_size(); };
+			reference top() { return c.back(); };
+			const_reference top() const { return c.back(); };
+			void push(const T& value) { c.push_back(value); };
+			void pop() { c.pop_back(); };
+	
+			bool operator==(const stack<T,container_type>& lhs) const { return c == lhs.c; };
+			bool operator!=(const stack<T,container_type>& lhs) const { return c != lhs.c; };
+			bool operator<(const stack<T,container_type>& lhs) const { return c < lhs.c; };
+			bool operator<=(const stack<T,container_type>& lhs) const { return c <= lhs.c; };
+			bool operator>(const stack<T,container_type>& lhs) const { return c > lhs.c; };
+			bool operator>=(const stack<T,container_type>& lhs) const { return c >= lhs.c; };
 	};
+	*/
 }
-*/

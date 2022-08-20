@@ -1,13 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_integral.cpp                                    :+:      :+:    :+:   */
+/*   exceptions.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 22:57:51 by bmangin           #+#    #+#             */
-/*   Updated: 2022/06/10 23:02:52 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2022/08/17 09:52:51 by bmangin           #+#    #+#             */
+/*   Updated: 2022/08/17 09:53:28 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools/is_integral.hpp"
+#include "tools/exceptions.hpp"
