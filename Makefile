@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 08:11:56 by bmangin           #+#    #+#              #
-#    Updated: 2022/08/20 02:29:43 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/08/20 03:18:21 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ override PATH_I		:= includes
 override PATH_B		:= .bin
 override PATH_V		:= vector
 override PATH_ST	:= stack
+override PATH_M		:= map
 override PATH_IT	:= iterator
 override PATH_TOOL	:= tools
 
@@ -33,7 +34,7 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_TOOL}} \
 
 FILES_S				:= main
 
-FILES_TOOL			:= exceptions nodes tools
+FILES_TOOL			:= exceptions pair nodes tools
 
 FILES				:= ${addprefix ${PATH_TOOL}/, ${FILES_TOOL}} \
 					${addprefix ${PATH_IT}/, ${PATH_IT}} \

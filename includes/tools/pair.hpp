@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:51:25 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/20 03:06:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/08/20 03:19:16 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ namespace ft {
 			V	value;
 		//CONSTRUCTEUR
 		pair() : key(), value() {}
-		pair(K p_key, V p_value) : key(p_key), p_value(p_value) {}
-		pair(ft::par<K, V> const& cpy) : key(cpy.key), value(cpy.value) {}
+		pair(K p_key, V p_value) : key(p_key), value(p_value) {}
+		pair(ft::pair<K, V> const& cpy) : key(cpy.key), value(cpy.value) {}
 		
 		//DESTRUCTEUR
 		~pair() {}
