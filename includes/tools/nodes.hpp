@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:47:11 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/20 03:20:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/08/20 03:33:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,39 @@ namespace ft {
 			node*					right;
 		
 		//CONSTRUCTEUR
-			node() : pair(), color(black), parent(), left(), right() {}
+			node(ft::pair<const K, V>& n_pair) : pair(n_pair), color(black),
+				parent(NULL), left(NULL), right(NULL) {}
+
 		//DESTRUCTEUR
 			~node(){}
+		
+		//OPERATEUR
+			node*	operator=(node const& cpy){
+				pair = cpy.pair
+				color = cpy.color
+				parent = cpy.parent
+				left = cpy.left
+				right = cpy.right
+				return *this;
+			}
+		
+			bool	operator==(node const& rhs) {
+				return (pair == rhs.pair);
+			}
+			bool	operator!=(node const& rhs) {
+				return (pair != rhs.pair);
+			}
+			bool	operator>=(const node& other) const {
+				return (pair >= other.pair);
+			}
+			bool	operator<=(const node& other) const {
+				return (pair <= other.pair);
+			}
+			bool	operator>(const node& other) const {
+				return (pair > other.pair);
+			}
+			bool	operator<(const node& other) const {
+				return (pair < other.pair);
+			}
 	};
 }
