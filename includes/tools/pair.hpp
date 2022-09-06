@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:51:25 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/20 03:19:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/09/05 23:08:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,55 @@ namespace ft {
 	template <typename K, typename V>
 	class pair {
 		public:
-			K	key;
-			V	value;
+			K	first;
+			V	second;
+
 		//CONSTRUCTEUR
-		pair() : key(), value() {}
-		pair(K p_key, V p_value) : key(p_key), value(p_value) {}
-		pair(ft::pair<K, V> const& cpy) : key(cpy.key), value(cpy.value) {}
+		pair() : first(), second() {}
+		pair(K p_key, V p_value) : first(p_key), second(p_value) {}
+		pair(ft::pair<K, V> const& cpy) : first(cpy.first), second(cpy.second) {}
 		
 		//DESTRUCTEUR
 		~pair() {}
 		
 		//OPERATEUR
-		pair<K, V> &operator=(ft::pair<K, V> const& rhs) {
-			this->key = rhs.key;
-			this->value = rhs.value;
+		pair<K, V>	&operator=(ft::pair<K, V> const& rhs) {
+			first = rhs.first;
+			second = rhs.second;
 			return *this;
 		}
-		bool operator==(ft::pair<K, V> const& rhs) {
-			return this->first == rhs.first && this->second == rhs.second;
+		bool	operator==(ft::pair<K, V> const& rhs) {
+			return first == rhs.first && second == rhs.second;
 		}
-		bool operator!=(ft::pair<K, V> const& rhs) {
-			return this->first != rhs.first || this->second != rhs.second;
+		bool	operator!=(ft::pair<K, V> const& rhs) {
+			return first != rhs.first || second != rhs.second;
 		}
-		bool operator<(ft::pair<K, V> const& rhs) {
-			return this->first < rhs.first ||
-				   (this->first == rhs.first && this->second < rhs.second);
+		bool	operator<(ft::pair<K, V> const& rhs) {
+			return first < rhs.first ||
+				   (first == rhs.first && second < rhs.second);
 		}
-		bool operator<=(ft::pair<K, V> const& rhs) {
-			return this->first < rhs.first ||
-				   (this->first == rhs.first && this->second < rhs.second) ||
-				   (this->first == rhs.first && this->second == rhs.second);
+		bool	operator<=(ft::pair<K, V> const& rhs) {
+			return first < rhs.first ||
+				   (first == rhs.first && second < rhs.second) ||
+				   (first == rhs.first && second == rhs.second);
 		}
-		bool operator>(ft::pair<K, V> const& rhs) {
-			return this->first > rhs.first ||
-				   (this->first == rhs.first && this->second > rhs.second);
+		bool	operator>(ft::pair<K, V> const& rhs) {
+			return first > rhs.first ||
+				   (first == rhs.first && second > rhs.second);
 		}
-		bool operator>=(ft::pair<K, V> const& rhs) {
-			return this->first > rhs.first ||
-				   (this->first == rhs.first && this->second > rhs.second) ||
-				   (this->first == rhs.first && this->second == rhs.second);
+		bool	operator>=(ft::pair<K, V> const& rhs) {
+			return first > rhs.first ||
+				   (first == rhs.first && second > rhs.second) ||
+				   (first == rhs.first && second == rhs.second);
+		}
+		bool	compare(ft::pair<K, V> const& lhs, ft::pair<K, V> const& rhs) {
+			return lhs == rhs;
+		}
+		void	print(void) {
+			std::cout << "Key: " << first << " Value: " << second << std::endl;
 		}
 	};
+	
+	template< class T1, class T2 >
+	pair<T1,T2> make_pair(T1 t, T2 u) { return(pair<T1, T2>(t, u)); }
 }

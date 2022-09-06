@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 08:11:56 by bmangin           #+#    #+#              #
-#    Updated: 2022/08/20 03:18:21 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/08/30 12:24:25 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_TOOL}} \
 					${addprefix ${PATH_S}/, ${PATH_IT}} \
 					${addprefix ${PATH_S}/, ${PATH_ST}} \
 					${addprefix ${PATH_S}/, ${PATH_V}} \
+					${addprefix ${PATH_S}/, ${PATH_M}} \
 					${PATH_S}
  
 # ********************************	 FILES   ********************************* #
@@ -39,6 +40,7 @@ FILES_TOOL			:= exceptions pair nodes tools
 FILES				:= ${addprefix ${PATH_TOOL}/, ${FILES_TOOL}} \
 					${addprefix ${PATH_IT}/, ${PATH_IT}} \
 					${addprefix ${PATH_ST}/, ${PATH_ST}} \
+					${addprefix ${PATH_M}/, ${PATH_M}} \
 					${addprefix ${PATH_V}/, ${PATH_V}}
 
 ALL_FILES			:= ${FILES} ${FILES_S}
@@ -68,7 +70,6 @@ RM					:= rm -rf
 
 all: crea_b ${NAME}
 	$(info $$var is [${PATH_B}])
-	@ echo YOUPI
 	
 see_var:
 	@ echo ${NAME}

@@ -1,132 +1,109 @@
-----------------------------------
-TEST STACK DEFAULT COPY
-----------------------------------
-empty: 0
-size: 6
-Added some elements
-empty: 0
-size: 12
+insert return: key: 42 | value: lol
+Created new node: 1
+size: 1
+max_size: 288230376151711743
 
-Content was:
-- 6
-- 5
-- 4
-- 3
-- 2
-- 1
-- 183792
-- 0
-- 19
-- 1337
-- 42
-- 21
+Content is:
+- key: 42 | value: lol
 ###############################################
-----------------------------------
-TEST STACK DEFAULT
-----------------------------------
-empty: 1
-size: 0
-Added some elements
-empty: 0
+insert return: key: 42 | value: lol
+Created new node: 0
+size: 1
+max_size: 288230376151711743
+
+Content is:
+- key: 42 | value: lol
+###############################################
+insert return: key: 50 | value: mdr
+Created new node: 1
+size: 2
+max_size: 288230376151711743
+
+Content is:
+- key: 42 | value: lol
+- key: 50 | value: mdr
+###############################################
+insert return: key: 35 | value: funny
+Created new node: 1
+size: 3
+max_size: 288230376151711743
+
+Content is:
+- key: 35 | value: funny
+- key: 42 | value: lol
+- key: 50 | value: mdr
+###############################################
+insert return: key: 45 | value: bunny
+Created new node: 1
 size: 4
+max_size: 288230376151711743
 
-Content was:
-- 42
-- 10
-- 29
-- 41
+Content is:
+- key: 35 | value: funny
+- key: 42 | value: lol
+- key: 45 | value: bunny
+- key: 50 | value: mdr
 ###############################################
-----------------------------------
-TEST STACK LIST COPY
-----------------------------------
-empty: 0
+insert return: key: 21 | value: fizz
+Created new node: 1
+size: 5
+max_size: 288230376151711743
+
+Content is:
+- key: 21 | value: fizz
+- key: 35 | value: funny
+- key: 42 | value: lol
+- key: 45 | value: bunny
+- key: 50 | value: mdr
+###############################################
+insert return: key: 38 | value: buzz
+Created new node: 1
 size: 6
-Added some elements
-empty: 0
-size: 12
+max_size: 288230376151711743
 
-Content was:
-- 6
-- 5
-- 4
-- 3
-- 2
-- 1
-- 183792
-- 0
-- 19
-- 1337
-- 42
-- 21
+Content is:
+- key: 21 | value: fizz
+- key: 35 | value: funny
+- key: 38 | value: buzz
+- key: 42 | value: lol
+- key: 45 | value: bunny
+- key: 50 | value: mdr
 ###############################################
-----------------------------------
-TEST STACK LIST OPER
-----------------------------------
-############### [0] ###############
-eq: 1 | ne: 0
-lt: 0 | le: 1
-gt: 0 | ge: 1
-############### [1] ###############
-eq: 1 | ne: 0
-lt: 0 | le: 1
-gt: 0 | ge: 1
-############### [2] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [3] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-############### [4] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [5] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-############### [6] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [7] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-----------------------------------
-TEST STACK OPER RELAT
-----------------------------------
-############### [8] ###############
-eq: 1 | ne: 0
-lt: 0 | le: 1
-gt: 0 | ge: 1
-############### [9] ###############
-eq: 1 | ne: 0
-lt: 0 | le: 1
-gt: 0 | ge: 1
-############### [10] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [11] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-############### [12] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [13] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-############### [14] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [15] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
+insert return: key: 55 | value: fuzzy
+size: 7
+max_size: 288230376151711743
+
+Content is:
+- key: 21 | value: fizz
+- key: 35 | value: funny
+- key: 38 | value: buzz
+- key: 42 | value: lol
+- key: 45 | value: bunny
+- key: 50 | value: mdr
+- key: 55 | value: fuzzy
+###############################################
+insert return: key: 1337 | value: beauty
+size: 1
+max_size: 288230376151711743
+
+Content is:
+- key: 1337 | value: beauty
+###############################################
+insert return: key: 1000 | value: Hello
+size: 2
+max_size: 288230376151711743
+
+Content is:
+- key: 1000 | value: Hello
+- key: 1337 | value: beauty
+###############################################
+insert return: key: 1500 | value: World
+size: 3
+max_size: 288230376151711743
+
+Content is:
+- key: 1000 | value: Hello
+- key: 1337 | value: beauty
+- key: 1500 | value: World
+###############################################
 std (C0)

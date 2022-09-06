@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:32:41 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/20 00:35:10 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/08/27 18:31:30 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,45 +69,7 @@ bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, I
 	}
 	return true;
 }
-/*
-// SECTION equal
-template <class InputIterator1, class InputIterator2>
-class equality {
-   public:
-	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2) {
-		while (first1 != last1) {
-			if (!(*first1 == *first2))
-				return false;
-			++first1;
-			++first2;
-		}
-		return true;
-	}
-};
-template <class InputIterator1, class InputIterator2, class BinaryPredicate>
-class predicate {
-   public:
-	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, BinaryPredicate pred) {
-		while (first1 != last1) {
-			if (!pred(*first1, *first2))
-				return false;
-			++first1;
-			++first2;
-		}
-		return true;
-	}
-};
-// template <class T>
-// int				lexicographical_compare(T const &a, T const &b) {
-// 	for (size_t i = 0; i < a.size(); i++) {
-// 		if (a[i] < b[i])
-// 			return 2;
-// 		else if (a[i] != b[i])
-// 			return 1;
-// 	}
-// 	return 0;
-// }
-*/
+
 template <class T>
 struct less : std::binary_function<T, T, bool> {
 	bool operator()(const T& x, const T& y) const { return x < y; }
