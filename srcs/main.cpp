@@ -125,15 +125,8 @@ int		main(void)
 	std::list<T3> lst;
 	std::list<T3>::iterator itlst;
 
-	iterator tmp;
-	ft::pair<iterator, bool>	test;
-	
-	test = mp.insert(42);
-	// tmp = mp.insert(42, "lol");
-
-	// std::cout << "insert return: " << printPair(tmp);
-	// ft_insert(mp, T3(42, "lol"));
-	// ft_insert(mp, T3(42, "mdr"));
+	ft_insert(mp, T3(42, "lol"));
+	ft_insert(mp, T3(42, "mdr"));
 
 	// ft_insert(mp, T3(50, "mdr"));
 	// ft_insert(mp, T3(35, "funny"));

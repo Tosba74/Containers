@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:47:11 by bmangin           #+#    #+#             */
-/*   Updated: 2022/09/30 09:40:22 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 15:50:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,56 +30,6 @@ enum e_color {
 
 namespace ft {
 
-/*
-	template <typename K, typename V>
-	class node {
-		public:
-			ft::pair<const K, V>	pair;
-			e_color					color;
-			node*					parent;
-			node*					child[2];
-		
-		//CONSTRUCTEUR
-			node(ft::pair<const K, V>& n_pair) : pair(n_pair), color(black),
-				parent(NULL), child(NULL) {}
-
-		//DESTRUCTEUR
-			~node(){}
-		
-		//GETTER
-			node*	get_child(bool dir) const { return child[dir]; }
-			node*	get_parent() const { return parent; }
-			
-		//OPERATEUR
-			node*	operator=(node const& cpy){
-				pair = cpy.pair;
-				color = cpy.color;
-				parent = cpy.parent;
-				child[0] = cpy.child[0];
-				child[1] = cpy.child[1];
-				return *this;
-			}
-		
-			bool	operator==(node const& rhs) {
-				return (pair == rhs.pair);
-			}
-			bool	operator!=(node const& rhs) {
-				return (pair != rhs.pair);
-			}
-			bool	operator>=(const node& other) const {
-				return (pair >= other.pair);
-			}
-			bool	operator<=(const node& other) const {
-				return (pair <= other.pair);
-			}
-			bool	operator>(const node& other) const {
-				return (pair > other.pair);
-			}
-			bool	operator<(const node& other) const {
-				return (pair < other.pair);
-			}
-	};
-*/
 	template<class T>
 	class	node {
 		public :
@@ -87,11 +37,12 @@ namespace ft {
 			typedef value_type*	pointer;
 			
 		private:
-			pointer		_value;
-			node*		_child[2];
-			node*		_parent;
-			bool		_color;
+			pointer				_value;
+			node*				_child[2];
+			node*				_parent;
+			bool				_color;
 		
+		//CONSTRUCTEUR
 		public :
 			node() : _value(0), _parent(0), _color(BLACK) {
 				_child[LEFT] = 0;
@@ -106,12 +57,16 @@ namespace ft {
 			node(const node &	rhs) {
 				*this = rhs;
 			}
+
+		//DESTRUCTEUR
 			virtual ~node() {
 				if (_child[LEFT] && !_child[LEFT]->get_value())
 					delete _child[LEFT];
 				if (_child[RIGHT] && !_child[RIGHT]->get_value())
 					delete _child[RIGHT];
 			}
+
+		//OPERATOR
 			node& operator=(const node & rhs) {
 					_value = rhs._value;
 					_child[LEFT] = rhs._child[LEFT];
@@ -120,6 +75,8 @@ namespace ft {
 					_color = rhs._color;
 					return *this;
 			}
+			
+		//GETTEUR
 			pointer	get_value() const { return _value; }
 			bool	get_color() const { return _color; }
 			node	*get_child(bool dir) const { return _child[dir]; }
@@ -148,6 +105,8 @@ namespace ft {
 					return(RIGHT);
 				return (LEFT);
 			}
+			
+		//SETTEUR
 			void	set_child(node *rhs, bool dir) { _child[dir] = rhs; }
 			void	set_brother(node *rhs) { get_brother() = rhs; }
 			void	set_parent(node *rhs) { _parent = rhs; }
