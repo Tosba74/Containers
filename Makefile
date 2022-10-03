@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 08:11:56 by bmangin           #+#    #+#              #
-#    Updated: 2022/08/30 12:24:25 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/10/03 15:14:14 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ clean:
 	@echo ".bin deleted"
 
 fclean: clean
+	${RM} ${NAME}
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:47:11 by bmangin           #+#    #+#             */
-/*   Updated: 2022/09/01 14:00:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 09:40:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ namespace ft {
 	template<class T>
 	class	node {
 		public :
-			typedef T		value_type;
-			typedef T*		pointer;
+			typedef T			value_type;
+			typedef value_type*	pointer;
 			
 		private:
 			pointer		_value;
@@ -112,7 +112,7 @@ namespace ft {
 				if (_child[RIGHT] && !_child[RIGHT]->get_value())
 					delete _child[RIGHT];
 			}
-			node & operator=(const node & rhs) {
+			node& operator=(const node & rhs) {
 					_value = rhs._value;
 					_child[LEFT] = rhs._child[LEFT];
 					_child[RIGHT] = rhs._child[RIGHT];
@@ -120,8 +120,11 @@ namespace ft {
 					_color = rhs._color;
 					return *this;
 			}
+			pointer	get_value() const { return _value; }
+			bool	get_color() const { return _color; }
 			node	*get_child(bool dir) const { return _child[dir]; }
 			node	*get_parent() const { return _parent; }
+			
 			node	*get_grand_parent() const {
 				if (_parent)
 					return (_parent->get_parent());
@@ -138,8 +141,6 @@ namespace ft {
 					return (0);
 				return (tmp->get_brother());
 			}
-			pointer	get_value() const { return _value; }
-			bool	get_color() const { return _color; }
 			bool	get_side() const {
 				if (!_parent)
 					return (0);

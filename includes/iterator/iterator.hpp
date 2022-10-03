@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:16:06 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/30 22:27:47 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 15:04:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,16 @@ namespace ft {
 	
 	};
 	
-	// template < class T >
-	// class iterator_traits<T*>
-	// {
-	// 	public :
-	
-	// 		typedef random_access_iterator_tag			iterator_category;
-	// 		typedef T									value_type;
-	// 		typedef std::ptrdiff_t						difference_type;
-	// 		typedef const T*							pointer;
-	// 		typedef const T&							reference;
-	// };
+	template < class T >
+	class iterator_traits<T*>
+	{
+		public :
+			typedef random_access_iterator_tag			iterator_category;
+			typedef T									value_type;
+			typedef std::ptrdiff_t						difference_type;
+			typedef const T*							pointer;
+			typedef const T&							reference;
+	};
 	
 
 	template < class Iterator>

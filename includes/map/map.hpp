@@ -33,8 +33,10 @@ namespace ft {
 
 			// typedef std::pair<const Key, T>					value_type;
 
-			typedef value_type*								pointer;
-			typedef const value_type*						const_pointer;
+			typedef typename Alloc::pointer				pointer;
+			typedef typename Alloc::const_pointer		const_pointer;
+			// typedef value_type*								pointer;
+			// typedef const value_type*						const_pointer;
 			typedef value_type&								reference;
 			typedef const value_type&						const_reference;
 
@@ -42,23 +44,22 @@ namespace ft {
 			typedef std::ptrdiff_t							difference_type;
 			typedef Alloc									allocator_type;
 
-			class value_compare : public std::binary_function<value_type, value_type, bool> {
-				friend class map;
-				public :
-					typedef bool							result_type;
-					typedef value_type						first_argument_type;
-					typedef value_type						second_argument_type;
+			// class value_compare : public std::binary_function<value_type, value_type, bool> {
+				// friend class map;
+				// public :
+					// typedef bool							result_type;
+					// typedef value_type						first_argument_type;
+					// typedef value_type						second_argument_type;
+// 
+					// bool operator()(const value_type& lhs, const value_type& rhs) const {
+						// return _comp(lhs.first, rhs.first);
+					// }
+				// protected :
+// 
+					// value_compare(Compare c) : _comp(c) {};
+					// Compare _comp;
+			// };
 
-					bool operator()(const value_type& lhs, const value_type& rhs) const {
-						return _comp(lhs.first, rhs.first);
-					}
-				protected :
-
-					value_compare(Compare c) : _comp(c) {};
-					Compare _comp;
-			};
-
-			/*
 			class value_compare {
 				public:
 					bool operator()(const value_type& lhs, const value_type& rhs) const {
@@ -70,6 +71,7 @@ namespace ft {
 					Compare comp;
 			};
 
+			/*
 
 			class MapIterator : public ft::iterator<std::bidirectional_iterator_tag, value_type> {
 				public:
@@ -236,7 +238,7 @@ namespace ft {
 					}
 			};
 			*/
-			class MapIterator : public ft::iterator<std::bidirectional_iterator_tag, T>
+			class MapIterator : public ft::iterator<bidirectional_iterator_tag, T>
 			{
 				public :
 
@@ -248,8 +250,8 @@ namespace ft {
 					// typedef typename ft::map<key_type, mapped_type, key_compare, Alloc>::nodePtr									nodePtr;
 					typedef std::ptrdiff_t						difference_type;
 					typedef T									value_type;
-					typedef T*									pointer;
-					typedef T&									reference;
+					typedef value_type*							pointer;
+					typedef value_type&							reference;
 					typedef bidirectional_iterator_tag			iterator_category;
 
 					MapIterator(void) : _ptr(0) {}
@@ -260,7 +262,6 @@ namespace ft {
 					// operator MapIterator<const T>() const {
 						// return MapIterator<const T>(reinterpret_cast<node<const value_type> *>(_elem));
 					// }
-
 					MapIterator&		operator=(node<value_type> * rhs) {
 						_ptr = rhs;
 						return *this;
@@ -297,7 +298,7 @@ namespace ft {
 					}
 
 
-				private :
+				protected :
 					nodePtr _ptr;
 
 					nodePtr			_neighbor(bool dir) const {
@@ -328,7 +329,7 @@ namespace ft {
 			typedef Compare				key_compare;
 
 			typedef MapIterator								iterator;
-			typedef MapIterator								const_iterator;
+			typedef const iterator							const_iterator;
 			typedef ft::reverse_iterator< iterator >		reverse_iterator;
 			typedef ft::reverse_iterator< const_iterator >	const_reverse_iterator;
 			// typedef MapReverseIterator			reverse_iterator;
@@ -521,7 +522,7 @@ namespace ft {
 			nodePtr		i = _root;
 			bool		dir;
 
-			if (!_root->get_value())
+			if (!_root || !_root->get_value())
 			{
 				delete _root;
 				_root = new_elem;
@@ -670,4 +671,29 @@ namespace ft {
 				_correct(x);
 		}
 	};
+	
+	template<class Key, class T, class Compare, class Alloc>
+	bool operator==(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs) {
+		if (lhs.size() != rhs.size())
+			return false;
+		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	bool operator!=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs) { return !(lhs == rhs); }
+
+	template<class Key, class T, class Compare, class Alloc>
+	bool operator<(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs) { return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end())); }
+
+	template<class Key, class T, class Compare, class Alloc>
+	bool operator<=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs) { return (!(lhs > rhs)); }
+
+	template<class Key, class T, class Compare, class Alloc>
+	bool operator>(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs) { return (!(lhs == rhs || lhs < rhs)); }
+
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator>=( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) { return (!(lhs < rhs)); }
+
+	template<class Key, class T, class Compare, class Alloc>
+	void swap(map<Key,T,Compare,Alloc>& lhs, map<Key,T,Compare,Alloc>& rhs) { lhs.swap(rhs); }
 }

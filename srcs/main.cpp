@@ -34,7 +34,7 @@ typedef ft::map<T1, T2>::value_type T3;
 typedef ft::map<T1, T2>::iterator iterator;
 
 // static int g_index = 0;
-
+/*
 void	legende() {
 	std::cout << "*---+---*" << std::endl;
 	std::cout << "| E | S |" << std::endl;
@@ -52,6 +52,7 @@ std::ostream&	operator<<(std::ostream& o, const ft::vector<int>& v)
 	o << "]" << std::endl;
 	return o;
 }
+*/
 template <typename T>
 std::string		printPair(const T &iterator, bool nl = true, std::ostream &o = std::cout)
 {
@@ -75,6 +76,7 @@ void	printSize(T_MAP const &mp, bool print_content = 1)
 	}
 	std::cout << "###############################################" << std::endl;
 }
+/*
 
 template <typename Test1, typename Test2>
 void	printReverse(ft::map<Test1, Test2> &mp)
@@ -88,6 +90,7 @@ void	printReverse(ft::map<Test1, Test2> &mp)
 	}
 	std::cout << "_______________________________________________" << std::endl;
 }
+*/
 
 template <typename MAP, typename U>
 void	ft_insert(MAP &mp, U param)
@@ -98,7 +101,7 @@ void	ft_insert(MAP &mp, U param)
 	tmp = mp.insert(param);
 	std::cout << "insert return: " << printPair(tmp.first);
 	std::cout << "Created new node: " << tmp.second << std::endl;
-	printSize(mp);
+	// printSize(mp);
 }
 
 template <typename MAP, typename U, typename V>
@@ -109,9 +112,8 @@ void	ft_insert(MAP &mp, U param, V param2)
 	// std::cout << "\t-- [" << g_index++ << "] --" << std::endl;
 	tmp = mp.insert(param, param2);
 	std::cout << "insert return: " << printPair(tmp);
-	printSize(mp);
+	// printSize(mp);
 }
-
 
 int		main(void)
 {

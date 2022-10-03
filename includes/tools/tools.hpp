@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:32:41 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/27 18:31:30 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 22:54:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPredicate p)
 template< class InputIt1, class InputIt2 >
 bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
 {
-	for ( ; first1 != last1; first1++)
+	for (; first1 != last1; first1++)
 	{
 		if (first2 == last2 || *first2 < *first1)
 			return false;
@@ -72,8 +72,9 @@ bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, I
 
 template <class T>
 struct less : std::binary_function<T, T, bool> {
-	bool operator()(const T& x, const T& y) const { return x < y; }
+	bool	operator()(const T& x, const T& y) const { return x < y; }
 };
+
 // SECTION enable_if
 template <bool Cond, class T>
 struct enable_if {};
