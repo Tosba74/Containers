@@ -30,10 +30,12 @@
 
 #define T1 int
 #define T2 std::string
+#define T3 char
 
-typedef ft::map<T1, T2>::value_type	T3;
+typedef ft::map<T1, T2>::value_type	T4;
 typedef ft::map<T1, T2>::iterator	iterator;
-typedef ft::pair<const T1, T2>			T4;
+typedef ft::pair<const T1, T2>		T5;
+typedef ft::pair<const T3, T1>		T6;
 
 // static int g_index = 0;
 /*
@@ -126,6 +128,16 @@ void	ft_erase(MAP &mp, U param, V param2) {
 	mp.erase(param, param2);
 	printSize(mp);
 }
+template <typename MAP, typename U>
+void	ft_erase2(MAP &mp, U param)
+{
+	std::cout << "ret: " << mp.erase(param) << std::endl;
+	printSize(mp);
+}
+template <class T>
+void	is_empty(T const &mp) {
+	std::cout << "is_empty: " << mp.empty() << std::endl;
+}
 
 int		main(void)
 {
@@ -134,37 +146,37 @@ int		main(void)
 
 	ft::map<T1, T2>			mp;
 	ft::map<T1, T2>			mp2;
-	std::list<T3>			lst;
-	std::list<T3>::iterator itlst;
+	std::list<T4>			lst;
+	std::list<T4>::iterator itlst;
 
-	ft_insert(mp, T3(42, "lol"));
-	ft_insert(mp, T3(42, "mdr"));
+	ft_insert(mp, T4(42, "lol"));
+	ft_insert(mp, T4(42, "mdr"));
 
-	ft_insert(mp, T3(50, "mdr"));
-	ft_insert(mp, T3(35, "funny"));
+	ft_insert(mp, T4(50, "mdr"));
+	ft_insert(mp, T4(35, "funny"));
 
-	ft_insert(mp, T3(45, "bunny"));
-	ft_insert(mp, T3(21, "fizz"));
-	ft_insert(mp, T3(38, "buzz"));
+	ft_insert(mp, T4(45, "bunny"));
+	ft_insert(mp, T4(21, "fizz"));
+	ft_insert(mp, T4(38, "buzz"));
 	
-	ft_insert(mp, mp.begin(), T3(55, "fuzzy"));
+	ft_insert(mp, mp.begin(), T4(55, "fuzzy"));
 
-	ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
-	ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
-	ft_insert(mp2, mp2.end(), T3(1500, "World"));
+	ft_insert(mp2, mp2.begin(), T4(1337, "beauty"));
+	ft_insert(mp2, mp2.end(), T4(1000, "Hello"));
+	ft_insert(mp2, mp2.end(), T4(1500, "World"));
 
-	std::list<T3> 			lst2;
-	std::list<T3>::iterator itlst2;
+	std::list<T4> 			lst2;
+	std::list<T4>::iterator itlst2;
 
-	lst2.push_back(T3(42, "lol"));
+	lst2.push_back(T4(42, "lol"));
 
-	lst2.push_back(T3(50, "mdr"));
-	lst2.push_back(T3(35, "funny"));
+	lst2.push_back(T4(50, "mdr"));
+	lst2.push_back(T4(35, "funny"));
 
-	lst2.push_back(T3(45, "bunny"));
-	lst2.push_back(T3(21, "fizz"));
-	lst2.push_back(T3(38, "buzz"));
-	lst2.push_back(T3(55, "fuzzy"));
+	lst2.push_back(T4(45, "bunny"));
+	lst2.push_back(T4(21, "fizz"));
+	lst2.push_back(T4(38, "buzz"));
+	lst2.push_back(T4(55, "fuzzy"));
 
 	std::cout << "List contains:" << std::endl;
 	for (itlst2 = lst2.begin(); itlst2 != lst2.end(); ++itlst2)
@@ -175,13 +187,13 @@ int		main(void)
 
 	lst2.clear();
 
-	lst2.push_back(T3(87, "hey"));
-	lst2.push_back(T3(47, "eqweqweq"));
-	lst2.push_back(T3(35, "this key is already inside"));
-	lst2.push_back(T3(23, "but not that one"));
-	lst2.push_back(T3(1, "surprising isnt it?"));
-	lst2.push_back(T3(100, "is it enough??"));
-	lst2.push_back(T3(55, "inside map too"));
+	lst2.push_back(T4(87, "hey"));
+	lst2.push_back(T4(47, "eqweqweq"));
+	lst2.push_back(T4(35, "this key is already inside"));
+	lst2.push_back(T4(23, "but not that one"));
+	lst2.push_back(T4(1, "surprising isnt it?"));
+	lst2.push_back(T4(100, "is it enough??"));
+	lst2.push_back(T4(55, "inside map too"));
 
 	std::cout << "List contains:" << std::endl;
 	for (itlst2 = lst2.begin(); itlst2 != lst2.end(); ++itlst2)
@@ -191,14 +203,14 @@ int		main(void)
 	ft_insert2(mp3, lst2.begin(), lst2.end());
 
 	// ERASE
-	std::list<T4> lst3;
+	std::list<T5>	lst3;
 
 	unsigned int lst_size = 10;
 	for (unsigned int i = 0; i < lst_size; ++i)
 	
-		lst3.push_back(T3(i, std::string((lst_size - i), i + 65)));
+		lst3.push_back(T4(i, std::string((lst_size - i), i + 65)));
 
-	ft::map<T1, T2> mp4(lst3.begin(), lst3.end());
+	ft::map<T1, T2>	mp4(lst3.begin(), lst3.end());
 	
 	printSize(mp4);
 
@@ -220,6 +232,51 @@ int		main(void)
 	printSize(mp4);
 	ft_erase(mp4, mp4.begin(), mp4.end());
 
+	std::list<T5>	lst4;
+
+	lst_size = 6;
+	for (unsigned int i = 0; i < lst_size; ++i)
+		lst4.push_back(T5(i, std::string((lst_size - i), i + 65)));
+
+	ft::map<T1, T2> mp5(lst4.begin(), lst4.end());
+
+	printSize(mp5);
+
+	for (int i = 2; i < 4; ++i)
+		ft_erase(mp5, i);
+	ft_erase(mp5, mp5.begin()->first);
+	ft_erase(mp5, (--mp5.end())->first);
+	mp5[-1] = "Hello";
+	mp5[10] = "Hi there";
+	mp5[10] = "Hi there";
+	printSize(mp5);
+	ft_erase(mp5, 0);
+	ft_erase(mp5, 1);
+
+	// EMPTY
+	std::list<T6> lst5;
+
+	lst_size = 7;
+	for (unsigned int i = 0; i < lst_size; ++i)
+		lst5.push_back(T6('a' + i, lst_size - i));
+
+	ft::map<T3, T1>				mp6(lst5.begin(), lst5.end());
+	ft::map<T3, T1>				mp7;
+	ft::map<T3, T1>::iterator	it;
+
+	lst5.clear();
+	is_empty(mp6);
+	printSize(mp6);
+	is_empty(mp7);
+	mp7 = mp6;
+	is_empty(mp7);
+	it = mp6.begin();
+	for (unsigned long int i = 3; i < mp6.size(); ++i)
+		it++->second = i * 7;
+	printSize(mp6);
+	printSize(mp7);	
+
+	return (0);
 	if (CHOICE)
 		std::cout << "std (C0)" << std::endl;
 	else
