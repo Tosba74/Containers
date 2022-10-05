@@ -161,9 +161,12 @@ namespace ft {
 		// DESTRUCTEUR
 
 		~map(void) {
+			// std::cout << _root->get_value()->first << std::endl;
+			printBT(_root);
 			if (_size)
 				clear();
-			delete _root;
+			// delete _root;
+			std::cout << "\e[34m" << "miracle !" << "\e[0m" << std::endl; 
 		}
 
 		// GETTEUR
@@ -198,30 +201,14 @@ namespace ft {
 
 		// ITERATOR
 
-		iterator begin() {
-			return iterator(_begin());
-		}
-		const_iterator begin() const {
-			return const_iterator(reinterpret_cast<nodePtr>(_begin()));
-		}
-		iterator end() {
-			return iterator(_end());
-		}
-		const_iterator end() const {
-			return const_iterator(reinterpret_cast<nodePtr>(_end()));
-		}
-		reverse_iterator rbegin() {
-			return reverse_iterator(_end());
-		}
-		const_reverse_iterator rbegin() const {
-			return const_reverse_iterator(rbegin());
-		}
-		reverse_iterator rend() {
-			return reverse_iterator(_begin());
-		}
-		const_reverse_iterator rend() const {
-			return const_reverse_iterator(rend());
-		}
+		iterator begin() { return iterator(_begin()); }
+		const_iterator begin() const { return const_iterator(reinterpret_cast<nodePtr>(_begin())); }
+		iterator end() { return iterator(_end()); }
+		const_iterator end() const { return const_iterator(reinterpret_cast<nodePtr>(_end())); }
+		reverse_iterator rbegin() { return reverse_iterator(_end()); }
+		const_reverse_iterator rbegin() const { return const_reverse_iterator(rbegin()); }
+		reverse_iterator rend() { return reverse_iterator(_begin()); }
+		const_reverse_iterator rend() const { return const_reverse_iterator(rend()); }
 
 		// CAPACITY
 		bool empty() const { return (!_size); }
@@ -278,12 +265,16 @@ namespace ft {
 		void erase(iterator first, iterator last) {
 			iterator	next = first;
 			iterator	now;
+			
+			std::cout << "\e[31m" << "ou ici ?" << "\e[0m" << std::endl;
 			while (next != last) {
 				now = first;
 				++first;
 				next = first;
 				erase(now);
+				std::cout << "\e[32m" << "ah" << "\e[0m";
 			}
+		std::cout << std::endl;
 		}
 		size_type erase(const key_type& key) {
 			nodePtr		old_node = _find(key);
@@ -315,11 +306,35 @@ namespace ft {
 		void clear() {
 			erase(begin(), end());
 		}
+		// void clear() {
+			// _clear_tree(_root);
+			// _root = NULL;
+			// _size = 0;
+		// }
 
 		// LOOK UP
+		// size_type count(const Key& key) const {}
+		// iterator find(const Key& key) {}
+		// const_iterator find(const Key& key) const {}
+		// std::pair<iterator,iterator> equal_range(const Key& key) {}
+		// std::pair<const_iterator,const_iterator> equal_range(const Key& key) const {}
+		// iterator lower_bound(const Key& key) {}
+		// const_iterator lower_bound(const Key& key) const {}
+		// iterator upper_bound(const Key& key) {}
+		// const_iterator upper_bound(const Key& key) const {}
+
 		// OBSERVERS
 
-		private:
+	private:
+		void		_clear_tree(nodePtr node) {
+			if (!node)
+				return;
+			_clear_tree(node->get_child(LEFT));
+			_clear_tree(node->get_child(RIGHT));
+			// delete node;
+			std::allocator<nodeType>().deallocate(node, 1);
+			_size--;
+		}
 		nodePtr		_end() const {
 			nodePtr		tmp = _root;
 			while(tmp->get_child(RIGHT))
@@ -394,7 +409,7 @@ namespace ft {
 			}
 		}
 		void	_red_black(nodePtr elem) {
-			bool			dir = LEFT;
+			bool		dir = LEFT;
 			nodePtr		uncle;
 	
 			if (_root == elem) {
@@ -501,6 +516,21 @@ namespace ft {
 			if (y_original_color == BLACK)
 				_correct(x);
 		}
+		void    printBT(const std::string& prefix, const nodePtr n, bool isLeft) {
+		    if (n && n->get_value()) {
+		        std::cout << prefix << (isLeft ? "├──" : "└──" );
+		        if (n->get_color())
+		            std::cout << "\e[31m";
+		        std::cout << *n << "\e[0m" << std::endl;
+
+		        printBT( prefix + (isLeft ? "│   " : "    "), n->get_child(LEFT), true);
+		        printBT( prefix + (isLeft ? "│   " : "    "), n->get_child(RIGHT), false);
+		    }
+		}
+		void printBT(const nodePtr n) {
+			std::cout << "\e[34m" << "size :" << _size << " | val_root :" << *_root << "\e[0m" << std::endl;
+		    printBT("", n, false);
+		}
 	};
 
 	template<class Key, class T, class Compare, class Alloc>
@@ -523,7 +553,7 @@ namespace ft {
 	bool operator>(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs) { return (!(lhs == rhs || lhs < rhs)); }
 
 	template< class Key, class T, class Compare, class Alloc >
-	bool operator>=( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) { return (!(lhs < rhs)); }
+	bool operator>=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs) { return (!(lhs < rhs)); }
 
 	template<class Key, class T, class Compare, class Alloc>
 	void swap(map<Key,T,Compare,Alloc>& lhs, map<Key,T,Compare,Alloc>& rhs) { lhs.swap(rhs); }

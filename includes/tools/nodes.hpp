@@ -6,22 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:47:11 by bmangin           #+#    #+#             */
-/*   Updated: 2022/10/04 21:44:59 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 22:41:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "tools/pair.hpp"
-
-// #define RED "\e[31m"
-// #define BLACK "\e[30m"
-// #define DEFAULT "\e[39m"
-
-enum e_color {
-	black,
-	red
-};
 
 # define LEFT 0
 # define RIGHT 1
@@ -50,8 +41,8 @@ namespace ft {
 			}
 			node(pointer value) : _value(value), _parent(0), _color(RED) {
 				_child[LEFT] = new node();
-				_child[LEFT]->set_parent(this);
 				_child[RIGHT] = new node();
+				_child[LEFT]->set_parent(this);
 				_child[RIGHT]->set_parent(this);
 			}
 			node(const node & rhs) {
@@ -115,5 +106,17 @@ namespace ft {
 			void	set_color(bool rhs) { _color = rhs; }
 	
 	};
+	
+	template<class T>
+	std::ostream& operator<<(std::ostream& o, const node<T> &n) {
+  		if (n.get_color())
+       		o << "\e[34m";
+		if (n.get_value()->first)
+    		o << n.get_value()->first << "\e[0m";
+		else
+			o << "\e[31m" << "X";
+    	return o;
+	}
+
 	
 }

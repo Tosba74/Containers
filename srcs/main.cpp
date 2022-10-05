@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:08:16 by bmangin           #+#    #+#             */
-/*   Updated: 2022/08/17 16:16:31by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 22:50:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ int		main(void)
 	// EMPTY
 	std::list<T6> lst5;
 
-	lst_size = 7;
+	lst_size = 15;
 	for (unsigned int i = 0; i < lst_size; ++i)
 		lst5.push_back(T6('a' + i, lst_size - i));
 
@@ -273,10 +273,12 @@ int		main(void)
 	it = mp6.begin();
 	for (unsigned long int i = 3; i < mp6.size(); ++i)
 		it++->second = i * 7;
+	std::cout << "\e[31m" << "Woueshhh!" << "\e[0m" << std::endl;
 	printSize(mp6);
+	std::cout << "\e[31m" << "Arthoun!" << "\e[0m" << std::endl;
 	printSize(mp7);	
+	std::cout << "\e[31m" << "Arthoun!" << "\e[0m" << std::endl;
 
-	return (0);
 	if (CHOICE)
 		std::cout << "std (C0)" << std::endl;
 	else
