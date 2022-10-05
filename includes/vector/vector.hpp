@@ -292,7 +292,7 @@ namespace ft {
 			
 			allocator_type	get_allocator() const { return _alloc; }
 			
-			//ELEMENT ACCESS
+			//node ACCESS
 			reference		at(size_type n) {
 				if (n >= _size) {
 					throw OutOfRangeException();

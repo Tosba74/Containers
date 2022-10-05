@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:47:11 by bmangin           #+#    #+#             */
-/*   Updated: 2022/10/03 15:50:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 21:44:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ namespace ft {
 			typedef T			value_type;
 			typedef value_type*	pointer;
 			
-		private:
+		private :
 			pointer				_value;
 			node*				_child[2];
 			node*				_parent;
@@ -54,7 +54,7 @@ namespace ft {
 				_child[RIGHT] = new node();
 				_child[RIGHT]->set_parent(this);
 			}
-			node(const node &	rhs) {
+			node(const node & rhs) {
 				*this = rhs;
 			}
 

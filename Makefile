@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 08:11:56 by bmangin           #+#    #+#              #
-#    Updated: 2022/10/03 15:27:01 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/10/05 12:15:08 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,13 +81,13 @@ see_var:
 	@ echo ${OBJS}
 
 ${NAME}: ${OBJS}
-	${CCF} -o ${NAME} ${OBJS}
+	${CCFS} -o ${NAME} ${OBJS}
 	
 fs: ${OBJS}
 	${CCFS} -o ${NAME} ${OBJS}
 	
 ${PATH_B}/%.o: %.cpp ${INCS}
-	${CCF} -o $@ -c $<
+	${CCFS} -o $@ -c $<
 	
 crea_b:
 	${shell mkdir -p ${PATH_B}}	

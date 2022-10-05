@@ -136,7 +136,7 @@ int		main(void)
 	stck.push(5);
 	stck.push(6);
 
-	std::cout << "Added some elements" << std::endl;
+	std::cout << "Added some nodes" << std::endl;
 
 	std::cout << "empty: " << stck.empty() << std::endl;
 	printSize(stck);	
@@ -154,7 +154,7 @@ int		main(void)
 	stck2.push(29);
 	stck2.push(10);
 	stck2.push(42);
-	std::cout << "Added some elements" << std::endl;
+	std::cout << "Added some nodes" << std::endl;
 
 	std::cout << "empty: " << stck2.empty() << std::endl;
 	printSize(stck2);
@@ -184,7 +184,7 @@ int		main(void)
 	stck1.push(5);
 	stck1.push(6);
 
-	std::cout << "Added some elements" << std::endl;
+	std::cout << "Added some nodes" << std::endl;
 
 	std::cout << "empty: " << stck1.empty() << std::endl;
 	printSize(stck1);

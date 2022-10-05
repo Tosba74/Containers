@@ -241,15 +241,8 @@ namespace ft {
 			class MapIterator : public ft::iterator<bidirectional_iterator_tag, T>
 			{
 				public :
-
-					// typedef typename ft::iterator_traits<ft::map<key_type, mapped_type, key_compare, Alloc> >::difference_type		difference_type;
-					// typedef typename ft::iterator_traits<ft::map<key_type, mapped_type, key_compare, Alloc> >::value_type			value_type;
-					// typedef typename ft::iterator_traits<ft::map<key_type, mapped_type, key_compare, Alloc> >::pointer				pointer;
-					// typedef typename ft::iterator_traits<ft::map<key_type, mapped_type, key_compare, Alloc> >::reference			reference;
-					// typedef typename ft::iterator_traits<ft::map<key_type, mapped_type, key_compare, Alloc> >::iterator_category	iterator_category;
-					// typedef typename ft::map<key_type, mapped_type, key_compare, Alloc>::nodePtr									nodePtr;
 					typedef std::ptrdiff_t						difference_type;
-					typedef T									value_type;
+					// typedef T									value_type;
 					typedef value_type*							pointer;
 					typedef value_type&							reference;
 					typedef bidirectional_iterator_tag			iterator_category;
@@ -260,8 +253,9 @@ namespace ft {
 					virtual ~MapIterator(void) {}
 
 					// operator MapIterator<const T>() const {
-						// return MapIterator<const T>(reinterpret_cast<node<const value_type> *>(_elem));
+						// return MapIterator<const T>(reinterpret_cast<node<const value_type> *>(_ptr));
 					// }
+
 					MapIterator&		operator=(node<value_type> * rhs) {
 						_ptr = rhs;
 						return *this;
@@ -275,10 +269,9 @@ namespace ft {
 					bool				operator!=(const MapIterator& rhs) const { return (_ptr != rhs._ptr); }
 
 					reference			operator*(void) { return *(_ptr->get_value()); }
-					pointer				operator->(void) { return _ptr->get_value(); }
+					value_type*			operator->(void) const { return (_ptr->get_value()); }
 
 					MapIterator&		operator++(void) {
-						std::cout << "jss la fdp" <<std::endl;
 						_ptr = _neighbor(RIGHT);
 						return *this;
 					}
@@ -301,6 +294,7 @@ namespace ft {
 				protected :
 					nodePtr _ptr;
 
+				private :
 					nodePtr			_neighbor(bool dir) const {
 						nodePtr	tmp = _ptr;
 
@@ -329,7 +323,7 @@ namespace ft {
 			typedef Compare				key_compare;
 
 			typedef MapIterator								iterator;
-			typedef const iterator							const_iterator;
+			typedef const MapIterator						const_iterator;
 			typedef ft::reverse_iterator< iterator >		reverse_iterator;
 			typedef ft::reverse_iterator< const_iterator >	const_reverse_iterator;
 			// typedef MapReverseIterator			reverse_iterator;
@@ -343,46 +337,47 @@ namespace ft {
 
 		public:
 		// CONSTRUCTEUR
+		// map() : _size(0), _comp(key_compare()),_alloc(allocator_type()) {
+			// _root = new node<value_type>();
+		// }
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = Alloc())
-						: _root(NULL), _size(0), _alloc(alloc), _comp(comp) {};
-
+			: _size(0), _alloc(alloc), _comp(comp) {
+			_root = new node<value_type>();
+		}
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-			const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _alloc(alloc), _comp(comp) {
+			const allocator_type& alloc = allocator_type()) : _size(0), _alloc(alloc), _comp(comp) {
+			_root = new node<value_type>();
 			insert(first, last);
 		}
-		// INFO Copy <other>
 		map(const map& other)
 			: _root(NULL), _size(0), _alloc(other._alloc), _comp(other._comp) {
-			insert(other.begin(), other.end());
-			_root->color = black;
-		}
-
-		map(value_type dpair) {
-			_root = standaloneNode(dpair);
-			_root->color = black;
-			_size = 1;
+			_root = new node<value_type>();
+			*this = other;
 		}
 
 		// DESTRUCTEUR && CLEAR
-		void clear(nodePtr node) {
-			if (!node)
-				return;
-			clear(node->get_child(LEFT));
-			clear(node->get_child(RIGHT));
-			std::allocator<nodeType>().deallocate(node, 1);
-			_size--;
-		}
-
-		void clear(void) {
-			clear(_root);
-			_root = NULL;
-			_size = 0;
-		}
 
 		~map(void) {
-			clear(_root);
+			if (_size)
+				clear();
+			delete _root;
 		}
+		// void clear(nodePtr node) {
+			// if (!node)
+				// return;
+			// clear(node->get_child(LEFT));
+			// clear(node->get_child(RIGHT));
+			// std::allocator<nodeType>().deallocate(node, 1);
+			// _size--;
+		// }
+// 
+		// void clear(void) {
+			// clear(_root);
+			// _root = NULL;
+			// _size = 0;
+		// }
+
 
 		// GETTEUR
 		allocator_type get_allocator() const {
@@ -437,28 +432,67 @@ namespace ft {
 			pointer new_value = _alloc.allocate(1);
 			_alloc.construct(new_value, value_type(value));
 
-			nodePtr		new_elem = new nodeType(new_value);
+			nodePtr		new_ptr = new nodeType(new_value);
 
-			_simple_insert(new_elem);
-			_red_black(new_elem);
+			_simple_insert(new_ptr);
+			_red_black(new_ptr);
 			_size++;
-			return (ft::make_pair(iterator(new_elem), true));
+			return (ft::make_pair(iterator(new_ptr), true));
 		}
-		iterator insert(iterator hint, const value_type& value)
-		{
+		iterator insert(iterator hint, const value_type& value) {
 			(void)hint;
 			pair<iterator, bool> res;
 			res = insert(value);
 			return res.first;
 		}
 		template<class InputIt>
-		void insert(InputIt first, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type last)
-		{
-			while(first != last)
-			{
+		void insert(InputIt first, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type last) {
+			while(first != last) {
 				insert(*first);
 				first++;
 			}
+		}
+		
+		// ERASE && CLEAR
+		void erase(iterator pos) {
+			if (_size > 1)
+				_delete(pos, _find(pos->first));
+			else {
+				_alloc.destroy(_root->get_value());
+				_alloc.deallocate(_root->get_value(), 1);
+				delete _root;
+				_root = new node<value_type>();
+			}
+			_size--;
+		}
+		void erase(iterator first, iterator last) {
+			iterator next = first;
+			iterator now;
+			while (next != last) {
+				now = first;
+				++first;
+				next = first;
+				erase(now);
+			}
+		}
+		size_type erase(const key_type& key) {
+			node<value_type> *	old_node = _find(key);
+
+			if (!old_node)
+				return 0;
+			if (_size > 1)
+				_delete(iterator(old_node), old_node);
+			else {
+				_alloc.destroy(_root->get_value());
+				_alloc.deallocate(_root->get_value(), 1);
+				delete _root;
+				_root = new node<value_type>();
+			}
+			_size--;
+			return 1;
+		}
+		void clear() {
+			erase(begin(), end());
 		}
 		// LOOK UP
 		// OBSERVERS
@@ -517,7 +551,7 @@ namespace ft {
 			tmp->set_child(rhs, dir);
 			rhs->set_parent(tmp);	
 		}
-		void	_simple_insert(nodePtr new_elem)
+		void	_simple_insert(nodePtr new_ptr)
 		{
 			nodePtr		i = _root;
 			bool		dir;
@@ -525,19 +559,19 @@ namespace ft {
 			if (!_root || !_root->get_value())
 			{
 				delete _root;
-				_root = new_elem;
+				_root = new_ptr;
 				return ;
 			}
 			while (i->get_value())
 			{
-				dir = value_compare(_comp)(*(i->get_value()), *(new_elem->get_value()));
+				dir = value_compare(_comp)(*(i->get_value()), *(new_ptr->get_value()));
 				if (i->get_child(dir) && i->get_child(dir)->get_value())
 					i = i->get_child(dir);
 				else
 				{
 					delete i->get_child(dir);
-					i->set_child(new_elem, dir);
-					new_elem->set_parent(i);
+					i->set_child(new_ptr, dir);
+					new_ptr->set_parent(i);
 					return ;
 				}
 			}
@@ -616,13 +650,13 @@ namespace ft {
 			}
 			x->set_color(BLACK);
 		}
-		void	_transplant(nodePtr del_elem, nodePtr rep_elem)
+		void	_transplant(nodePtr del_ptr, nodePtr rep_ptr)
 		{
-			if (!del_elem->get_parent())
-				_root = rep_elem;
+			if (!del_ptr->get_parent())
+				_root = rep_ptr;
 			else
-				del_elem->get_parent()->set_child(rep_elem, del_elem->get_side());
-			rep_elem->set_parent(del_elem->get_parent());
+				del_ptr->get_parent()->set_child(rep_ptr, del_ptr->get_side());
+			rep_ptr->set_parent(del_ptr->get_parent());
 		}
 		void	_delete(iterator del_it, nodePtr del_node)
 		{

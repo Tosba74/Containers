@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:16:06 by bmangin           #+#    #+#             */
-/*   Updated: 2022/10/03 15:04:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 16:30:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ namespace ft {
 			typedef const T&							reference;
 	};
 	
-
 	template < class Iterator>
 	class reverse_iterator
 	{
