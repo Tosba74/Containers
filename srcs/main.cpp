@@ -114,15 +114,21 @@ void	ft_insert(MAP &mp, U param, V param2)
 	std::cout << "insert return: " << printPair(tmp);
 	printSize(mp);
 }
+template <typename MAP, typename U>
+void	ft_insert2(MAP &mp, U param, U param2) {
+	// std::cout << "\t-- [" << iter++ << "] --" << std::endl;
+	mp.insert(param, param2);
+	printSize(mp);
+}
 
 int		main(void)
 {
 
 	// INSERT
 
-	ft::map<T1, T2>		mp;
-	ft::map<T1, T2>		mp2;
-	std::list<T3> lst;
+	ft::map<T1, T2>			mp;
+	ft::map<T1, T2>			mp2;
+	std::list<T3>			lst;
 	std::list<T3>::iterator itlst;
 
 	ft_insert(mp, T3(42, "lol"));
@@ -140,6 +146,43 @@ int		main(void)
 	ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
 	ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
 	ft_insert(mp2, mp2.end(), T3(1500, "World"));
+
+	std::list<T3> 			lst2;
+	std::list<T3>::iterator itlst2;
+
+	lst2.push_back(T3(42, "lol"));
+
+	lst2.push_back(T3(50, "mdr"));
+	lst2.push_back(T3(35, "funny"));
+
+	lst2.push_back(T3(45, "bunny"));
+	lst2.push_back(T3(21, "fizz"));
+	lst2.push_back(T3(38, "buzz"));
+	lst2.push_back(T3(55, "fuzzy"));
+
+	std::cout << "List contains:" << std::endl;
+	for (itlst2 = lst2.begin(); itlst2 != lst2.end(); ++itlst2)
+		printPair(itlst2);
+
+	ft::map<T1, T2> mp3;
+	ft_insert2(mp3, lst2.begin(), lst2.end());
+
+	lst2.clear();
+
+	lst2.push_back(T3(87, "hey"));
+	lst2.push_back(T3(47, "eqweqweq"));
+	lst2.push_back(T3(35, "this key is already inside"));
+	lst2.push_back(T3(23, "but not that one"));
+	lst2.push_back(T3(1, "surprising isnt it?"));
+	lst2.push_back(T3(100, "is it enough??"));
+	lst2.push_back(T3(55, "inside map too"));
+
+	std::cout << "List contains:" << std::endl;
+	for (itlst2 = lst2.begin(); itlst2 != lst2.end(); ++itlst2)
+		printPair(itlst2);
+
+	ft_insert2(mp3, lst2.begin(), lst2.begin());
+	ft_insert2(mp3, lst2.begin(), lst2.end());
 
 	if (CHOICE)
 		std::cout << "std (C0)" << std::endl;

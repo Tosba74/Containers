@@ -31,34 +31,14 @@ namespace ft {
 			// typedef ft::pair<const value_type>&			pairRef;
 			// typedef ft::pair<const value_type>*			pairPtr;
 
-			// typedef std::pair<const Key, T>					value_type;
-
-			typedef typename Alloc::pointer				pointer;
-			typedef typename Alloc::const_pointer		const_pointer;
-			// typedef value_type*								pointer;
-			// typedef const value_type*						const_pointer;
+			typedef typename Alloc::pointer					pointer;
+			typedef typename Alloc::const_pointer			const_pointer;
 			typedef value_type&								reference;
 			typedef const value_type&						const_reference;
 
 			typedef std::size_t								size_type;
 			typedef std::ptrdiff_t							difference_type;
 			typedef Alloc									allocator_type;
-
-			// class value_compare : public std::binary_function<value_type, value_type, bool> {
-				// friend class map;
-				// public :
-					// typedef bool							result_type;
-					// typedef value_type						first_argument_type;
-					// typedef value_type						second_argument_type;
-// 
-					// bool operator()(const value_type& lhs, const value_type& rhs) const {
-						// return _comp(lhs.first, rhs.first);
-					// }
-				// protected :
-// 
-					// value_compare(Compare c) : _comp(c) {};
-					// Compare _comp;
-			// };
 
 			class value_compare {
 				public:
@@ -71,173 +51,6 @@ namespace ft {
 					Compare comp;
 			};
 
-			/*
-
-			class MapIterator : public ft::iterator<std::bidirectional_iterator_tag, value_type> {
-				public:
-					typedef typename ft::iterator_traits<ft::map<key, mapped_type, Compare, Alloc> >::difference_type	difference_type;
-					typedef typename ft::iterator_traits<ft::map<key, mapped_type, Compare, Alloc> >::value_type		value_type;
-					typedef typename ft::iterator_traits<ft::map<key, mapped_type, Compare, Alloc> >::pointer			pointer;
-					typedef typename ft::iterator_traits<ft::map<key, mapped_type, Compare, Alloc> >::reference			reference;
-					typedef typename ft::iterator_traits<ft::map<key, mapped_type, Compare, Alloc> >::iterator_category	iterator_category;
-
-				private:
-
-				public:
-					nodePtr		ptr;
-					MapIterator(void) : ptr(NULL) {}
-					MapIterator(nodePtr ptr) : ptr(ptr) {}
-					MapIterator(const MapIterator& other) : ptr(other.ptr) {}
-					MapIterator& operator=(const MapIterator& other) {
-						ptr = other.ptr;
-						return *this;
-					}
-					MapIterator& operator++() {
-						ptr = ptr->getSuccessor();
-						return *this;
-					}
-					MapIterator operator++(int) {
-						MapIterator tmp(*this);
-						ptr = ptr->getSuccessor();
-						return tmp;
-					}
-					MapIterator& operator--() {
-						ptr = ptr->getPredecessor();
-						return *this;
-					}
-					MapIterator operator--(int) {
-						MapIterator tmp(*this);
-						ptr = ptr->getPredecessor();
-						return tmp;
-					}
-					bool operator==(const MapIterator& other) const {
-						return ptr == other.ptr;
-					}
-					bool operator!=(const MapIterator& other) const {
-						return ptr != other.ptr;
-					}
-					value_type& operator*() {
-						return ptr->pair;
-					}
-					value_type* operator->() const {
-						return &(ptr->pair);
-					}
-					bool operator<(const MapIterator& other) const {
-						return ptr < other.ptr;
-					}
-					bool operator>(const MapIterator& other) const {
-						return ptr > other.ptr;
-					}
-					bool operator<=(const MapIterator& other) const {
-						return ptr <= other.ptr;
-					}
-					bool operator>=(const MapIterator& other) const {
-						return ptr >= other.ptr;
-					}
-					bool operator==(const MapIterator& other) {
-						return ptr == other.ptr;
-					}
-					bool operator!=(const MapIterator& other) {
-						return ptr != other.ptr;
-					}
-					bool operator!() {
-						return ptr == NULL;
-					}
-					const K& first() {
-						return ptr->pair.first();
-					}
-					const V& second() {
-						return ptr->pair.second();
-					}
-					MapIterator operator+(int n) {
-						return ptr + n;
-					}
-					MapIterator operator-(int n) {
-						return ptr - n;
-					}
-			};
-
-			class MapReverseIterator : public ft::iterator<std::bidirectional_iterator_tag, value_type> {
-				public:
-					typedef typename MapIterator::difference_type difference_type;
-					typedef typename MapIterator::value_type value_type;
-					typedef typename MapIterator::pointer pointer;
-					typedef typename MapIterator::reference reference;
-					typedef typename MapIterator::iterator_category iterator_category;
-
-				public:
-					MapReverseIterator(void) : ptr(NULL) {}
-					MapReverseIterator(nodePtr ptr) : ptr(ptr) {}
-					MapReverseIterator(const MapReverseIterator& other) : ptr(other.ptr) {}
-					MapReverseIterator& operator=(const MapReverseIterator& other) {
-						ptr = other.ptr;
-						return *this;
-					}
-					MapReverseIterator& operator++() {
-						ptr = ptr->getPredecessor();
-						return *this;
-					}
-					MapReverseIterator operator++(int) {
-						MapReverseIterator tmp(*this);
-						ptr = ptr->getPredecessor();
-						return tmp;
-					}
-					MapReverseIterator& operator--() {
-						ptr = ptr->getSuccessor();
-						return *this;
-					}
-					MapReverseIterator operator--(int) {
-						MapReverseIterator tmp(*this);
-						ptr = ptr->getSuccessor();
-						return tmp;
-					}
-					bool operator==(const MapReverseIterator& other) const {
-						return ptr == other.ptr;
-					}
-					bool operator!=(const MapReverseIterator& other) const {
-						return ptr != other.ptr;
-					}
-					value_type& operator*() {
-						return ptr->pair;
-					}
-					value_type* operator->() {
-						return &(ptr->pair);
-					}
-					bool operator<(const MapReverseIterator& other) const {
-						return ptr < other.ptr;
-					}
-					bool operator>(const MapReverseIterator& other) const {
-						return ptr > other.ptr;
-					}
-					bool operator<=(const MapReverseIterator& other) const {
-						return ptr <= other.ptr;
-					}
-					bool operator>=(const MapReverseIterator& other) const {
-						return ptr >= other.ptr;
-					}
-					bool operator==(const MapReverseIterator& other) {
-						return ptr == other.ptr;
-					}
-					bool operator!=(const MapReverseIterator& other) {
-						return ptr != other.ptr;
-					}
-					bool operator!() {
-						return ptr == NULL;
-					}
-					const K& first() {
-						return ptr->pair.first();
-					}
-					const V& second() {
-						return ptr->pair.second();
-					}
-					MapReverseIterator operator+(int n) {
-						return ptr + n;
-					}
-					MapReverseIterator operator-(int n) {
-						return ptr - n;
-					}
-			};
-			*/
 			class MapIterator : public ft::iterator<bidirectional_iterator_tag, T>
 			{
 				public :
@@ -251,10 +64,6 @@ namespace ft {
 					MapIterator(nodePtr node) : _ptr(node) {}
 					MapIterator(const MapIterator& rhs) : _ptr(rhs._ptr) {}
 					virtual ~MapIterator(void) {}
-
-					// operator MapIterator<const T>() const {
-						// return MapIterator<const T>(reinterpret_cast<node<const value_type> *>(_ptr));
-					// }
 
 					MapIterator&		operator=(node<value_type> * rhs) {
 						_ptr = rhs;
@@ -326,8 +135,6 @@ namespace ft {
 			typedef MapIterator								const_iterator;
 			typedef ft::reverse_iterator< iterator >		reverse_iterator;
 			typedef ft::reverse_iterator< const_iterator >	const_reverse_iterator;
-			// typedef MapReverseIterator			reverse_iterator;
-			// typedef const MapReverseIterator	const_reverse_iterator;
 
 		private:
 			nodePtr				_root;
@@ -336,10 +143,6 @@ namespace ft {
 			key_compare			_comp;
 
 		public:
-		// CONSTRUCTEUR
-		// map() : _size(0), _comp(key_compare()),_alloc(allocator_type()) {
-			// _root = new nodeType();
-		// }
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = Alloc())
 			: _size(0), _alloc(alloc), _comp(comp) {
 			_root = new nodeType();
@@ -363,34 +166,15 @@ namespace ft {
 				clear();
 			delete _root;
 		}
-		// void clear(nodePtr node) {
-			// if (!node)
-				// return;
-			// clear(node->get_child(LEFT));
-			// clear(node->get_child(RIGHT));
-			// std::allocator<nodeType>().deallocate(node, 1);
-			// _size--;
-		// }
-// 
-		// void clear(void) {
-			// clear(_root);
-			// _root = NULL;
-			// _size = 0;
-		// }
-
 
 		// GETTEUR
 		allocator_type get_allocator() const {
 			return _alloc;
 		}
-			// map() {}
-			// explicit map( const key_compare& comp, const allocator_type& alloct = Allocator() ) {}
-			// template< class InputIt >
-			// map( InputIt first, InputIt last, const key_compare& comp = key_compare(), const allocator_type& alloct = Allocator() ) {}
-			// map( const map& other ) {}
-// 
-			// ~map();
 	
+		// ELEMENT ACCESS
+		// T& at( const Key& key );	
+		// const T& at( const Key& key ) const;
 		// ITERATOR
 
 		iterator begin() {
@@ -421,7 +205,7 @@ namespace ft {
 		// CAPACITY
 		bool empty() const { return (!_size); }
 		size_type size() const { return _size; }
-		size_type max_size() const { return _alloc.max_size(); }
+		size_type max_size() const { return (_alloc.max_size() / 2); }
 		// MODIFIERS
 		// INSERT
 		ft::pair<iterator, bool>	insert(const value_type& value) {
@@ -466,9 +250,8 @@ namespace ft {
 			_size--;
 		}
 		void erase(iterator first, iterator last) {
-			iterator	now;
 			iterator	next = first;
-
+			iterator	now;
 			while (next != last) {
 				now = first;
 				++first;
