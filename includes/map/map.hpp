@@ -158,7 +158,7 @@ namespace ft {
 			*this = other;
 		}
 
-		// DESTRUCTEUR && CLEAR
+		// DESTRUCTEUR
 
 		~map(void) {
 			if (_size)
@@ -172,19 +172,29 @@ namespace ft {
 		}
 	
 		// ELEMENT ACCESS
-		// T&			at(const Key& key) {
-		// 	nodePtr		tmp = _find(key);
+		T&			at(const Key& key) {
+			nodePtr		tmp = _find(key);
 
-		// 	if (!tmp)
-		// 		std::out_of_range("");
-		// 	else
-		// 		return (tmp->get_value()->second);
-		// }
-		// const T&	at(const Key& key) const {
+			if (!tmp)
+				std::out_of_range("");
+			return (tmp->get_value()->second);
+		}
+		const T&	at(const Key& key) const {
+			nodePtr		tmp = _find(key);
 
-		// }
-		// T&			operator[](const Key& key) {
-		// }
+			if (!tmp)
+				std::out_of_range("");
+			return (tmp->get_value()->second);
+		}
+		T&			operator[](const Key& key) {
+			nodePtr		tmp = _find(key);
+
+			if (!tmp) {
+				insert(ft::make_pair<key_type, mapped_type>(key, mapped_type()));
+				return (at(key));
+			}
+			return (tmp->get_value()->second);
+		}
 
 		// ITERATOR
 
@@ -235,12 +245,16 @@ namespace ft {
 			return (ft::make_pair(iterator(new_ptr), true));
 		}
 		iterator insert(iterator pos, const value_type& value) {
+			(void)pos;
 			pair<iterator, bool> res;
-
-			static_cast<void>(pos);
 			res = insert(value);
 			return res.first;
 		}
+		// {
+			// static_cast<void>(pos);
+			// res = insert(value);
+			// return res.first;
+		// }
 		template<class InputIt>
 		void insert(InputIt first, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type last) {
 			while(first != last) {
@@ -301,7 +315,7 @@ namespace ft {
 		void clear() {
 			erase(begin(), end());
 		}
-		
+
 		// LOOK UP
 		// OBSERVERS
 
@@ -343,8 +357,7 @@ namespace ft {
 			return 0;
 		}
 		
-		void	_rotate(nodePtr rhs, bool dir)
-		{
+		void	_rotate(nodePtr rhs, bool dir) {
 			if (!rhs)
 				return ;
 			nodePtr		tmp = rhs->get_child(!dir);
@@ -359,23 +372,20 @@ namespace ft {
 			tmp->set_child(rhs, dir);
 			rhs->set_parent(tmp);	
 		}
-		void	_simple_insert(nodePtr new_ptr){
+		void	_simple_insert(nodePtr new_ptr) {
 			nodePtr		i = _root;
 			bool		dir;
 
-			if (!_root || !_root->get_value())
-			{
+			if (!_root || !_root->get_value()) {
 				delete _root;
 				_root = new_ptr;
 				return ;
 			}
-			while (i->get_value())
-			{
+			while (i->get_value()) {
 				dir = value_compare(_comp)(*(i->get_value()), *(new_ptr->get_value()));
 				if (i->get_child(dir) && i->get_child(dir)->get_value())
 					i = i->get_child(dir);
-				else
-				{
+				else {
 					delete i->get_child(dir);
 					i->set_child(new_ptr, dir);
 					new_ptr->set_parent(i);
@@ -383,34 +393,26 @@ namespace ft {
 				}
 			}
 		}
-		void	_red_black(nodePtr elem)
-		{
+		void	_red_black(nodePtr elem) {
 			bool			dir = LEFT;
 			nodePtr		uncle;
 	
-			if (_root == elem)
-			{
+			if (_root == elem) {
 				elem->set_color(BLACK);
 				return ;
 			}
-			while(elem != _root && elem->get_parent()->get_color() == RED)
-			{
+			while(elem != _root && elem->get_parent()->get_color() == RED) {
 				uncle = elem->get_uncle();
 				dir = elem->get_parent()->get_side();
-				if (uncle && uncle->get_color() == RED)
-				{
+				if (uncle && uncle->get_color() == RED) {
 					elem->get_parent()->set_color(BLACK);
 					uncle->set_color(BLACK);
 					uncle->get_parent()->set_color(RED);
 					elem = elem->get_grand_parent();
-				}
-				else if (elem->get_side() == !dir)
-				{
+				} else if (elem->get_side() == !dir) {
 					elem = elem->get_parent();
 					_rotate(elem, dir);
-				}
-				else
-				{
+				} else {
 					elem->get_parent()->set_color(BLACK);
 					elem->get_grand_parent()->set_color(RED);
 					elem = elem->get_grand_parent();
@@ -423,24 +425,17 @@ namespace ft {
 		{
 			nodePtr w;
 
-			while (x != _root && x->get_color() == BLACK)
-			{
+			while (x != _root && x->get_color() == BLACK) {
 				w = x->get_brother();
-				if (w->get_color() == RED)
-				{
+				if (w->get_color() == RED) {
 					w->set_color(BLACK);
 					x->get_parent()->set_color(RED);
 					_rotate(x->get_parent(), x->get_side());
-				}
-				else if (w->get_value() && w->get_child(x->get_side())->get_color() == BLACK && w->get_child(w->get_side())->get_color() == BLACK)
-				{
+				} else if (w->get_value() && w->get_child(x->get_side())->get_color() == BLACK && w->get_child(w->get_side())->get_color() == BLACK) {
 					w->set_color(RED);
 					x = x->get_parent();
-				}
-				else
-				{
-					if (w->get_value() && w->get_child(w->get_side())->get_color() == BLACK)
-					{
+				} else {
+					if (w->get_value() && w->get_child(w->get_side())->get_color() == BLACK) {
 						w->get_child(x->get_side())->set_color(BLACK);
 						w->set_color(RED);
 						_rotate(w, w->get_side());
@@ -457,8 +452,7 @@ namespace ft {
 			}
 			x->set_color(BLACK);
 		}
-		void	_transplant(nodePtr del_ptr, nodePtr rep_ptr)
-		{
+		void	_transplant(nodePtr del_ptr, nodePtr rep_ptr) {
 			if (!del_ptr->get_parent())
 				_root = rep_ptr;
 			else
@@ -471,8 +465,7 @@ namespace ft {
 			bool					dir;
 			bool					y_original_color = del_node->get_color();
 
-			if (!del_node->get_child(RIGHT)->get_value() || !del_node->get_child(LEFT)->get_value())
-			{
+			if (!del_node->get_child(RIGHT)->get_value() || !del_node->get_child(LEFT)->get_value()) {
 				if (!del_node->get_child(RIGHT)->get_value())
 					dir = LEFT;
 				else
@@ -480,17 +473,14 @@ namespace ft {
 				x = del_node->get_child(dir);
 				_transplant(del_node, x);
 				del_node->set_child(0, dir);
-			}
-			else
-			{
+			} else {
 				del_it++;
 				nodePtr	repl_node = _find(del_it->first);
 				y_original_color = repl_node->get_color();
 				x = repl_node->get_child(RIGHT);
 				if (repl_node->get_parent() == del_node)
 					x->set_parent(repl_node);
-				else
-				{
+				else {
 					_transplant(repl_node, x);
 					repl_node->set_child(0, RIGHT);
 					repl_node->set_child(del_node->get_child(RIGHT), RIGHT);

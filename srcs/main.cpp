@@ -30,8 +30,10 @@
 
 #define T1 int
 #define T2 std::string
-typedef ft::map<T1, T2>::value_type T3;
-typedef ft::map<T1, T2>::iterator iterator;
+
+typedef ft::map<T1, T2>::value_type	T3;
+typedef ft::map<T1, T2>::iterator	iterator;
+typedef ft::pair<const T1, T2>			T4;
 
 // static int g_index = 0;
 /*
@@ -54,8 +56,7 @@ std::ostream&	operator<<(std::ostream& o, const ft::vector<int>& v)
 }
 */
 template <typename T>
-std::string		printPair(const T &iterator, bool nl = true, std::ostream &o = std::cout)
-{
+std::string		printPair(const T &iterator, bool nl = true, std::ostream &o = std::cout) {
 	o << "key: " << iterator->first << " | value: " << iterator->second;
 	if (nl)
 		o << std::endl;
@@ -63,8 +64,7 @@ std::string		printPair(const T &iterator, bool nl = true, std::ostream &o = std:
 }
 
 template <typename T_MAP>
-void	printSize(T_MAP const &mp, bool print_content = 1)
-{
+void	printSize(T_MAP const &mp, bool print_content = 1) {
 	std::cout << "size: " << mp.size() << std::endl;
 	std::cout << "max_size: " << mp.max_size() << std::endl;
 	if (print_content)
@@ -93,11 +93,9 @@ void	printReverse(ft::map<Test1, Test2> &mp)
 */
 
 template <typename MAP, typename U>
-void	ft_insert(MAP &mp, U param)
-{
+void	ft_insert(MAP &mp, U param) {
 	ft::pair<iterator, bool> tmp;
 
-	// std::cout << "\t-- [" << g_index++ << "] --" << std::endl;
 	tmp = mp.insert(param);
 	std::cout << "insert return: " << printPair(tmp.first);
 	std::cout << "Created new node: " << tmp.second << std::endl;
@@ -105,19 +103,27 @@ void	ft_insert(MAP &mp, U param)
 }
 
 template <typename MAP, typename U, typename V>
-void	ft_insert(MAP &mp, U param, V param2)
-{
+void	ft_insert(MAP &mp, U param, V param2) {
 	iterator tmp;
 
-	// std::cout << "\t-- [" << g_index++ << "] --" << std::endl;
 	tmp = mp.insert(param, param2);
 	std::cout << "insert return: " << printPair(tmp);
 	printSize(mp);
 }
 template <typename MAP, typename U>
 void	ft_insert2(MAP &mp, U param, U param2) {
-	// std::cout << "\t-- [" << iter++ << "] --" << std::endl;
 	mp.insert(param, param2);
+	printSize(mp);
+}
+template <typename MAP, typename U>
+void	ft_erase(MAP &mp, U param) {
+	mp.erase(param);
+	printSize(mp);
+}
+
+template <typename MAP, typename U, typename V>
+void	ft_erase(MAP &mp, U param, V param2) {
+	mp.erase(param, param2);
 	printSize(mp);
 }
 
@@ -183,6 +189,36 @@ int		main(void)
 
 	ft_insert2(mp3, lst2.begin(), lst2.begin());
 	ft_insert2(mp3, lst2.begin(), lst2.end());
+
+	// ERASE
+	std::list<T4> lst3;
+
+	unsigned int lst_size = 10;
+	for (unsigned int i = 0; i < lst_size; ++i)
+	
+		lst3.push_back(T3(i, std::string((lst_size - i), i + 65)));
+
+	ft::map<T1, T2> mp4(lst3.begin(), lst3.end());
+	
+	printSize(mp4);
+
+	ft_erase(mp4, ++mp4.begin());
+	ft_erase(mp4, mp4.begin());
+	ft_erase(mp4, --mp4.end());
+	ft_erase(mp4, mp4.begin(), ++(++(++mp4.begin())));
+	ft_erase(mp4, --(--(--mp4.end())), --mp4.end());
+
+	mp4[10] = "Hello";
+	mp4[11] = "Hi there";
+	printSize(mp4);
+	ft_erase(mp4, --(--(--mp4.end())), mp4.end());
+
+	mp4[12] = "ONE";
+	mp4[13] = "TWO";
+	mp4[14] = "THREE";
+	mp4[15] = "FOUR";
+	printSize(mp4);
+	ft_erase(mp4, mp4.begin(), mp4.end());
 
 	if (CHOICE)
 		std::cout << "std (C0)" << std::endl;
