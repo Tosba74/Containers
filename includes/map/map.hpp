@@ -323,7 +323,7 @@ namespace ft {
 			typedef Compare				key_compare;
 
 			typedef MapIterator								iterator;
-			typedef const MapIterator						const_iterator;
+			typedef MapIterator								const_iterator;
 			typedef ft::reverse_iterator< iterator >		reverse_iterator;
 			typedef ft::reverse_iterator< const_iterator >	const_reverse_iterator;
 			// typedef MapReverseIterator			reverse_iterator;
@@ -338,21 +338,21 @@ namespace ft {
 		public:
 		// CONSTRUCTEUR
 		// map() : _size(0), _comp(key_compare()),_alloc(allocator_type()) {
-			// _root = new node<value_type>();
+			// _root = new nodeType();
 		// }
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = Alloc())
 			: _size(0), _alloc(alloc), _comp(comp) {
-			_root = new node<value_type>();
+			_root = new nodeType();
 		}
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
 			const allocator_type& alloc = allocator_type()) : _size(0), _alloc(alloc), _comp(comp) {
-			_root = new node<value_type>();
+			_root = new nodeType();
 			insert(first, last);
 		}
 		map(const map& other)
 			: _root(NULL), _size(0), _alloc(other._alloc), _comp(other._comp) {
-			_root = new node<value_type>();
+			_root = new nodeType();
 			*this = other;
 		}
 
@@ -453,7 +453,7 @@ namespace ft {
 			}
 		}
 		
-		// ERASE && CLEAR
+		// ERASE && SWAP && CLEAR
 		void erase(iterator pos) {
 			if (_size > 1)
 				_delete(pos, _find(pos->first));
@@ -461,13 +461,14 @@ namespace ft {
 				_alloc.destroy(_root->get_value());
 				_alloc.deallocate(_root->get_value(), 1);
 				delete _root;
-				_root = new node<value_type>();
+				_root = new nodeType();
 			}
 			_size--;
 		}
 		void erase(iterator first, iterator last) {
-			iterator next = first;
-			iterator now;
+			iterator	now;
+			iterator	next = first;
+
 			while (next != last) {
 				now = first;
 				++first;
@@ -476,7 +477,7 @@ namespace ft {
 			}
 		}
 		size_type erase(const key_type& key) {
-			node<value_type> *	old_node = _find(key);
+			nodePtr		old_node = _find(key);
 
 			if (!old_node)
 				return 0;
@@ -486,10 +487,21 @@ namespace ft {
 				_alloc.destroy(_root->get_value());
 				_alloc.deallocate(_root->get_value(), 1);
 				delete _root;
-				_root = new node<value_type>();
+				_root = new nodeType();
 			}
 			_size--;
 			return 1;
+		}
+		void swap(map& rhs) {
+			nodePtr		tmp_root;
+			size_type	tmp_size;
+
+			tmp_root = _root;
+			_root = rhs._root;
+			rhs._root = tmp_root;
+			tmp_size = _size;
+			_size = rhs._size;
+			rhs._size = tmp_size;
 		}
 		void clear() {
 			erase(begin(), end());
@@ -551,8 +563,7 @@ namespace ft {
 			tmp->set_child(rhs, dir);
 			rhs->set_parent(tmp);	
 		}
-		void	_simple_insert(nodePtr new_ptr)
-		{
+		void	_simple_insert(nodePtr new_ptr){
 			nodePtr		i = _root;
 			bool		dir;
 

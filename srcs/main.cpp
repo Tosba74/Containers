@@ -69,7 +69,7 @@ void	printSize(T_MAP const &mp, bool print_content = 1)
 	std::cout << "max_size: " << mp.max_size() << std::endl;
 	if (print_content)
 	{
-		typename T_MAP::iterator it = mp.begin(), ite = mp.end();
+		typename T_MAP::const_iterator it = mp.begin(), ite = mp.end();
 		std::cout << std::endl << "Content is:" << std::endl;
 		for (; it != ite; ++it)
 			std::cout << "- " << printPair(it, false) << std::endl;
@@ -107,12 +107,10 @@ void	ft_insert(MAP &mp, U param)
 template <typename MAP, typename U, typename V>
 void	ft_insert(MAP &mp, U param, V param2)
 {
-	std::cout << "\e[31m" << "cest la ?" << "\e[0m" << std::endl;
 	iterator tmp;
 
 	// std::cout << "\t-- [" << g_index++ << "] --" << std::endl;
 	tmp = mp.insert(param, param2);
-	std::cout << "\e[31m" << "bah nan" << "\e[0m" << std::endl;
 	std::cout << "insert return: " << printPair(tmp);
 	printSize(mp);
 }
@@ -139,9 +137,7 @@ int		main(void)
 	
 	ft_insert(mp, mp.begin(), T3(55, "fuzzy"));
 
-	std::cout << "hein ?" << std::endl;
-
-	ft_insert(mp, mp2.begin(), T3(1337, "beauty"));
+	ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
 	ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
 	ft_insert(mp2, mp2.end(), T3(1500, "World"));
 
