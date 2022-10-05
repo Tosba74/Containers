@@ -35,7 +35,6 @@ namespace ft {
 			typedef typename Alloc::const_pointer			const_pointer;
 			typedef value_type&								reference;
 			typedef const value_type&						const_reference;
-
 			typedef std::size_t								size_type;
 			typedef std::ptrdiff_t							difference_type;
 			typedef Alloc									allocator_type;
@@ -173,8 +172,20 @@ namespace ft {
 		}
 	
 		// ELEMENT ACCESS
-		// T& at( const Key& key );	
-		// const T& at( const Key& key ) const;
+		// T&			at(const Key& key) {
+		// 	nodePtr		tmp = _find(key);
+
+		// 	if (!tmp)
+		// 		std::out_of_range("");
+		// 	else
+		// 		return (tmp->get_value()->second);
+		// }
+		// const T&	at(const Key& key) const {
+
+		// }
+		// T&			operator[](const Key& key) {
+		// }
+
 		// ITERATOR
 
 		iterator begin() {
@@ -223,9 +234,10 @@ namespace ft {
 			_size++;
 			return (ft::make_pair(iterator(new_ptr), true));
 		}
-		iterator insert(iterator hint, const value_type& value) {
-			(void)hint;
+		iterator insert(iterator pos, const value_type& value) {
 			pair<iterator, bool> res;
+
+			static_cast<void>(pos);
 			res = insert(value);
 			return res.first;
 		}
@@ -289,6 +301,7 @@ namespace ft {
 		void clear() {
 			erase(begin(), end());
 		}
+		
 		// LOOK UP
 		// OBSERVERS
 

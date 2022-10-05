@@ -173,8 +173,6 @@ namespace ft {
 
 			typedef VectorIterator			iterator;
 			typedef VectorIterator			const_iterator;
-			// typedef ft::reverse_iterator< iterator >		reverse_iterator;
-			// typedef ft::reverse_iterator< const_iterator >	const_reverse_iterator;
 			typedef VectorReverseIterator	reverse_iterator;
 			typedef VectorReverseIterator	const_reverse_iterator;
 
@@ -292,30 +290,25 @@ namespace ft {
 			
 			allocator_type	get_allocator() const { return _alloc; }
 			
-			//node ACCESS
+			//ELEMENT ACCESS
 			reference		at(size_type n) {
 				if (n >= _size) {
 					throw OutOfRangeException();
 				}
 				return _array[n];
 			}
-
 			const_reference		at(size_type n) const {
 				if (n >= _size) {
 					throw OutOfRangeException();
 				}
 				return _array[n];
 			}
-			
 			reference		operator[](size_type n) { return _array[n]; }
 			const_reference		operator[](size_type n) const { return _array[n]; }
-			
 			reference front() { return _array[0]; }
 			const_reference	front() const { return _array[0]; }
-			
 			reference back() { return _array[_size - 1]; }
 			const_reference	back() const { return _array[_size - 1]; }
-			
 			T*				data() { return _array; }
 			
 			//ITERATOR
@@ -327,32 +320,12 @@ namespace ft {
 			reverse_iterator rend(void) { return _array; };
 			const_reverse_iterator rbegin(void) const { return _array + _size; };
 			const_reverse_iterator rend(void) const { return _array; };
-			// iterator begin (void)
-			// { return iterator(_array[0]); }
-			// const_iterator begin (void) const
-			// { return const_iterator(_array[0]); }
-			// iterator end (void)
-			// { return iterator(_array[_size]); }
-			// const_iterator end (void) const
-			// { return const_iterator(_array[_size]); }
-			// reverse_iterator rbegin (void)
-			// { return reverse_iterator(end()); }
-			// const_reverse_iterator rbegin (void) const
-			// { return const_reverse_iterator(end()); }
-			// reverse_iterator rend (void)
-			// { return reverse_iterator(begin()); }
-			// const_reverse_iterator rend (void) const
-			// { return const_reverse_iterator(begin()); }
 		
 			//CAPACITY
 			bool			empty(void) const { return _size == 0; }
-			
 			size_type		size(void) const { return _size; }
-			
 			size_type		max_size(void) { return _alloc.max_size(); }
-
 			size_type		capacity(void) const { return _capa; }
-			
 			void			reserve(size_type n) {
 				if (n == 0) {
 					n = 1;
@@ -368,7 +341,6 @@ namespace ft {
 					_array = tmp;
 				}
 			}
-			
 			void			clear() {
 				for (size_type i = 0; i < _size; i++) {
 					_alloc.destroy(&_array[i]);
@@ -390,7 +362,6 @@ namespace ft {
 				_size++;
 				return pos;
 			}
-			
 			void			insert(iterator pos, size_type count, const T& value) {
 				difference_type delta = pos - this->begin();
 		        if (_size + count > _capa) {
@@ -405,7 +376,6 @@ namespace ft {
 				}
 				_size += count;
 			}
-
 			template <class InputIt>
 			void			insert(iterator pos, InputIt first, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt >::type last) {
 				if (first == last) {
@@ -418,8 +388,10 @@ namespace ft {
 				} else if (pos > this->end()) {
 					throw std::out_of_range("ft::Vector::insert : pos > this->end()");
 				}
+
 				difference_type count = pos - this->begin();
 				difference_type delta = last - first;
+
 				if (_size + delta > _capa) {
 					reserve(_size << 1);
 				}
@@ -432,7 +404,6 @@ namespace ft {
 				}
 				_size += delta;
 			}
-			
 			iterator		erase(iterator pos) {
 				if (size_type(pos - this->begin()) >= _size) {
 					throw OutOfRangeException();
@@ -444,7 +415,6 @@ namespace ft {
 				_size--;
 				return _array + size_type(pos - this->begin());
 			}
-			
 			iterator		erase(iterator first, iterator last) {
 				if (first > last) {
 					throw std::out_of_range("ft::Vector::erase : first > last");
@@ -462,7 +432,6 @@ namespace ft {
 				_size -= delta;
 				return _array + size_type(first - this->begin());
 			}
-			
 			void			push_back(const T& val) {
 				if (_size >= _capa) {
 					reserve(_capa << 1);
@@ -470,12 +439,10 @@ namespace ft {
 				_alloc.construct(&_array[_size], val);
 				_size++;
 			}
-			
 			void			pop_back() {
 				_alloc.destroy(&_array[_size - 1]);
 				_size--;
 			}
-			
 			void			resize(size_type n, T val = T()) {
 				if (n > _capa) {
 					if (n < (_capa << 1))
@@ -497,55 +464,12 @@ namespace ft {
 				}
 				_size = n;
 			}
-			
 			void			swap(vector& v) {
 				std::swap(_alloc, v._alloc);
 				std::swap(_array, v._array);
 				std::swap(_size, v._size);
 				std::swap(_capa, v._capa);
 			}
-
-			/*
-			int				lexicographical_compare(T const &a, T const &b) {
-				for (size_t i = 0; i < a.size(); i++) {
-					if (a[i] < b[i])
-						return 2;
-					else if (a[i] != b[i])
-						return 1;
-				}
-				return 0;
-			}
-
-			bool			operator==(const vector& v) const {
-				if (_size != v._size) {
-					return false;
-				}
-				for (size_type i = 0; i < _size; i++) {
-					if (_array[i] != v._array[i]) {
-						return false;
-					}
-				}
-				return true;
-			}
-			bool			operator!=(const vector& v) const { return !(*this == v); }
-			bool			operator<(const vector& v) const {
-				for (size_type i = 0; i < _size; i++) {
-					if (_array[i] < v._array[i])
-						return true;
-					else if (_array[i] > v._array[i])
-						return false;
-				}
-				if (_size < v._size) {
-					return true;
-				} else if (_size > v._size) {
-					return false;
-				}
-				return false;
-			}
-			bool			operator<=(const vector& v) const { return (*this < v || *this == v); }
-			bool			operator>(const vector& v) const { return !(*this <= v); }
-			bool			operator>=(const vector& v) const { return (!(*this < v)); }
-*/
 	};
 	template <class T, class Alloc>
 	void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
