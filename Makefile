@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 08:11:56 by bmangin           #+#    #+#              #
-#    Updated: 2022/10/05 22:06:07 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/10/06 19:30:31 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ OBJS				:= ${addprefix ${PATH_B}/, ${notdir ${SRCS:.cpp=.o}}}
 INCS				:= ${addprefix ${PATH_I}/, ${addsuffix .hpp, ${FILES}}}
 INCL				:= ${addprefix ${PATH_I}/, ${PATH_TOOL}} \
 					${addprefix ${PATH_I}/, ${PATH_IT}} \
+					${addprefix ${PATH_I}/, ${PATH_ST}} \
 					${addprefix ${PATH_I}/, ${PATH_M}} \
 					${addprefix ${PATH_I}/, ${PATH_V}}
 

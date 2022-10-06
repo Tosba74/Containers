@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:08:16 by bmangin           #+#    #+#             */
-/*   Updated: 2022/10/06 16:52:02 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 23:30:35 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #define T1 int
 #define T2 std::string
 #define T3 char
+#define T8 foo<float>
 
 typedef ft::map<T1, T2>::value_type	T4;
 typedef ft::map<T1, T2>::iterator	iterator;
@@ -39,26 +40,88 @@ typedef ft::pair<const T1, T2>		T5;
 typedef ft::pair<const T3, T1>		T6;
 typedef ft::pair<const T1, T1>		T7;
 
-// static int g_index = 0;
-/*
-void	legende() {
-	std::cout << "*---+---*" << std::endl;
-	std::cout << "| E | S |" << std::endl;
-	std::cout << "| M | I |" << std::endl;
-	std::cout << "| P | Z |		MAP			|" << std::endl;
-	std::cout << "| T | E |" << std::endl;
-	std::cout << "| Y |   |" << std::endl;
-	std::cout << "*---+---*" << std::endl;
+struct ft_more {
+	bool	operator()(const T1 &first, const T1 &second) const {
+		return (first > second);
+	}
+};
+
+typedef ft::map<T1, T2, ft_more> ft_mp;
+typedef ft::map<T1, T2, ft_more>::iterator ft_mp_it;
+
+template <class MAP>
+void	cmp(const MAP &lhs, const MAP &rhs) {
+	static int i = 0;
+
+	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
 }
-std::ostream&	operator<<(std::ostream& o, const ft::vector<int>& v)
-{
-	o << "[ ";
-	for (ft::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it)
-		o << *it << " ";
-	o << "]" << std::endl;
+template <typename T>
+class foo {
+	public:
+		typedef T	value_type;
+
+		foo(void) : value(), _verbose(false) { };
+		foo(value_type src, const bool verbose = false) : value(src), _verbose(verbose) { };
+		foo(foo const &src, const bool verbose = false) : value(src.value), _verbose(verbose) { };
+		~foo(void) { if (this->_verbose) std::cout << "~foo::foo()" << std::endl; };
+		void m(void) { std::cout << "foo::m called [" << this->value << "]" << std::endl; };
+		void m(void) const { std::cout << "foo::m const called [" << this->value << "]" << std::endl; };
+		foo &operator=(value_type src) { this->value = src; return *this; };
+		foo &operator=(foo const &src) {
+			if (this->_verbose || src._verbose)
+				std::cout << "foo::operator=(foo) CALLED" << std::endl;
+			this->value = src.value;
+			return *this;
+		};
+		value_type	getValue(void) const { return this->value; };
+		void		switchVerbose(void) { this->_verbose = !(this->_verbose); };
+// 
+		operator value_type(void) const {
+			return value_type(this->value);
+		}
+	private:
+		value_type	value;
+		bool		_verbose;
+};
+
+#define T9 foo<int>
+typedef ft::map<T1, T9>::value_type			T10;
+typedef ft::map<T1, T9>::iterator			ft_iterator;
+typedef ft::map<T1, T9>::const_iterator		ft_const_iterator;
+
+template <typename T>
+std::ostream	&operator<<(std::ostream &o, foo<T> const &bar) {
+	o << bar.getValue();
 	return o;
 }
-*/
+// --- End of class foo
+
+template <typename T>
+T	inc(T it, int n) {
+	while (n-- > 0)
+		++it;
+	return (it);
+}
+
+template <typename T>
+T	dec(T it, int n) {
+	while (n-- > 0)
+		--it;
+	return (it);
+}
+
+void	ft_comp(const ft::map<T3, T8> &mp, const ft::map<T3, T8>::const_iterator &it1, const ft::map<T3, T8>::const_iterator &it2) {
+	bool res[2];
+
+	res[0] = mp.key_comp()(it1->first, it2->first);
+	// res[1] = mp.value_comp()(*it1, *it2);
+	res[1] = 1;
+	std::cout << "with [" << it1->first << " and " << it2->first << "]: ";
+	std::cout << "key_comp: " << res[0] << " | " << "value_comp: " << res[1] << std::endl;
+}
 template <typename T>
 std::string		printPair(const T &iterator, bool nl = true, std::ostream &o = std::cout) {
 	o << "key: " << iterator->first << " | value: " << iterator->second;
@@ -66,7 +129,34 @@ std::string		printPair(const T &iterator, bool nl = true, std::ostream &o = std:
 		o << std::endl;
 	return ("");
 }
+template <typename MAP>
+void	ft_bound(MAP &mp, const T1 &param) {
+	ft::map<T1, T9>::iterator							ite = mp.end();
+	ft::map<T1, T9>::iterator							it[2];
+	ft::pair<ft::map<T1, T9>::iterator, ft::map<T1, T9>::iterator>	ft_range;
 
+	std::cout << "with key [" << param << "]:" << std::endl;
+	it[0] = mp.lower_bound(param);
+	it[1] = mp.upper_bound(param);
+	ft_range = mp.equal_range(param);
+	std::cout << "lower_bound: " << (it[0] == ite ? "end()" : printPair(it[0], false)) << std::endl;
+	std::cout << "upper_bound: " << (it[1] == ite ? "end()" : printPair(it[1], false)) << std::endl;
+	std::cout << "equal_range: " << (ft_range.first == it[0] && ft_range.second == it[1]) << std::endl;
+}
+template <typename MAP>
+void	ft_const_bound(const MAP &mp, const T1 &param) {
+	ft_const_iterator								ite = mp.end();
+	ft_const_iterator								it[2];
+	ft::pair<ft_const_iterator, ft_const_iterator>	ft_range;
+
+	std::cout << "with key [" << param << "]:" << std::endl;
+	it[0] = mp.lower_bound(param);
+	it[1] = mp.upper_bound(param);
+	ft_range = mp.equal_range(param);
+	std::cout << "lower_bound: " << (it[0] == ite ? "end()" : printPair(it[0], false)) << std::endl;
+	std::cout << "upper_bound: " << (it[1] == ite ? "end()" : printPair(it[1], false)) << std::endl;
+	std::cout << "equal_range: " << (ft_range.first == it[0] && ft_range.second == it[1]) << std::endl;
+}
 template <typename T_MAP>
 void	printSize(T_MAP const &mp, bool print_content = 1) {
 	std::cout << "size: " << mp.size() << std::endl;
@@ -80,7 +170,6 @@ void	printSize(T_MAP const &mp, bool print_content = 1) {
 	}
 	std::cout << "###############################################" << std::endl;
 }
-/*
 
 template <typename Test1, typename Test2>
 void	printReverse(ft::map<Test1, Test2> &mp)
@@ -94,7 +183,6 @@ void	printReverse(ft::map<Test1, Test2> &mp)
 	}
 	std::cout << "_______________________________________________" << std::endl;
 }
-*/
 
 template <typename MAP, typename U>
 void	ft_insert(MAP &mp, U param) {
@@ -316,8 +404,212 @@ int		main(void)
 	printSize(mp8_range);
 	printSize(mp8_copy);
 	
-	// CONSTRUCT COPY
+	// COMP
+	ft::map<T3,T8>	mp9;
+
+	mp9['a'] = 2.3;
+	mp9['b'] = 1.4;
+	mp9['c'] = 0.3;
+	mp9['d'] = 4.2;
+	printSize(mp9);
+
+	for (ft::map<T3, T8>::const_iterator c_it1 = mp9.begin(); c_it1 != mp9.end(); ++c_it1)
+		for (ft::map<T3, T8>::const_iterator c_it2 = mp9.begin(); c_it2 != mp9.end(); ++c_it2)
+			ft_comp(mp9, c_it1, c_it2);
+
+	printSize(mp9);
 	
+	// ITERATOR
+	ft::map<T1, int> mp10;
+	mp10[1] = 2;
+
+	// ft::map<T1, int>::const_iterator iter = mp10.begin();
+	// *iter = 42; // < -- error
+	
+	ft::map<T1, T2> const mp11;
+	// ft::map<T1, T2>::iterator iter2 = mp11.begin(); // <-- error expected
+
+	// ft::map<char, int>::iterator			it_test;
+	// ft::map<char, float>::const_iterator	ite_test;
+// 
+	// std::cout << (it_test != ite_test) << std::endl;
+	
+	// MORE
+	ft_mp	mp_more;
+
+	mp_more[42] = "fgzgxfn";
+	mp_more[25] = "funny";
+	mp_more[80] = "hey";
+	mp_more[12] = "no";
+	mp_more[27] = "bee";
+	mp_more[90] = "8";
+	printSize(mp_more);
+	
+	// OPERATOR
+	ft::map<T3, foo<T2> > mp_op;
+
+	mp_op['a'] = "an element";
+	mp_op['b'] = "another element";
+	mp_op['c'] = mp_op['b'];
+	mp_op['b'] = "old element";
+
+	printSize(mp_op);
+	std::cout << "insert a new element via operator[]: " << mp_op['d'] << std::endl;
+	printSize(mp_op);	
+	
+	ft::map<T3, T1> mp_op1;
+	ft::map<T3, T1> mp_op2;
+
+	mp_op1['a'] = 2; mp_op1['b'] = 3; mp_op1['c'] = 4; mp_op1['d'] = 5;
+	mp_op2['a'] = 2; mp_op2['b'] = 3; mp_op2['c'] = 4; mp_op2['d'] = 5;
+
+	cmp(mp_op1, mp_op1); // 0
+	cmp(mp_op1, mp_op2); // 1
+
+	mp_op2['e'] = 6; mp_op2['f'] = 7; mp_op2['h'] = 8; mp_op2['h'] = 9;
+
+	cmp(mp_op1, mp_op2); // 2
+	cmp(mp_op2, mp_op1); // 3
+
+	(++(++mp_op1.begin()))->second = 42;
+
+	cmp(mp_op1, mp_op2); // 4
+	cmp(mp_op2, mp_op1); // 5
+
+	swap(mp_op1, mp_op2);
+
+	cmp(mp_op1, mp_op2); // 6
+	cmp(mp_op2, mp_op1); // 7	
+	
+	ft::map<T1, int>							mp_op3;
+	ft::map<T1, int>::iterator					it_op = mp_op3.begin();
+	ft::map<T1, int>::const_iterator			cit_op = mp_op3.begin();
+
+	ft::map<T1, int>::reverse_iterator			rit_op(it_op);
+
+	ft::map<T1, int>::const_reverse_iterator	crit_op(rit_op);
+	ft::map<T1, int>::const_reverse_iterator	crit_op_(it_op);
+	ft::map<T1, int>::const_reverse_iterator	crit_op_2(cit_op);
+
+	/* error expected
+	ft::map<T1, int>::reverse_iterator			rit_op_(crit_op);
+	ft::map<T1, int>::reverse_iterator			rit_op2(cit_op);
+	ft::map<T1, int>::iterator					it_op2(rit_op);
+	ft::map<T1, int>::const_iterator			cit_op2(crit_op);
+	*/
+	
+	std::list<T6> lst_op;
+	unsigned int lst_op_size = 5;
+	for (unsigned int i = 0; i < lst_op_size; ++i)
+		lst_op.push_back(T6('a' + i, (i + 1) * 7));
+
+	ft::map<T3, T1>						mp_op4(lst_op.begin(), lst_op.end());
+	ft::map<T3, T1>::iterator			it_op2_ = mp_op4.begin();
+	ft::map<T3, T1>::reverse_iterator	it_op2(it_op2_);
+	ft::map<T3, T1>::reverse_iterator	it_op2e;
+	printSize(mp_op4);
+
+	std::cout << (it_op2_ == it_op2.base()) << std::endl;
+	std::cout << (it_op2_ == dec(it_op2, 3).base()) << std::endl;
+
+	printPair(it_op2.base());
+	printPair(inc(it_op2.base(), 1));
+
+	std::cout << "TEST OFFSET" << std::endl;
+	--it_op2;
+	printPair(it_op2);
+	printPair(it_op2.base());
+
+	it_op2 = mp_op4.rbegin(); it_op2e = mp_op4.rend();
+	for (;it_op2 != it_op2e; it_op2++)
+		std::cout << "[rev] " << printPair(it_op2, false) << std::endl;
+	printReverse(mp_op4);
+
+	// SWAP
+	std::list<T6>					lst_sw;
+
+	lst_size = 7;
+	for (unsigned int i = 0; i < lst_size; ++i)
+		lst_sw.push_back(T6('a' + i, lst_size - i));
+		
+	ft::map<T3, T1>					foo_sw(lst_sw.begin(), lst_sw.end());
+
+	lst_sw.clear();
+	lst_size = 4;
+	for (unsigned int i = 0; i < lst_size; ++i)
+		lst_sw.push_back(T6('z' - i, i * 5));
+
+	ft::map<T3, T1>					bar(lst_sw.begin(), lst_sw.end());
+	ft::map<T3, T1>::const_iterator it_foo = foo_sw.begin();
+	ft::map<T3, T1>::const_iterator it_bar = bar.begin();
+
+	std::cout << "BEFORE SWAP" << std::endl;
+
+	std::cout << "foo contains:" << std::endl;
+	printSize(foo_sw);
+	std::cout << "bar contains:" << std::endl;
+	printSize(bar);
+
+	foo_sw.swap(bar);
+
+	std::cout << "AFTER SWAP" << std::endl;
+
+	std::cout << "foo contains:" << std::endl;
+	printSize(foo_sw);
+	std::cout << "bar contains:" << std::endl;
+	printSize(bar);
+
+	std::cout << "Iterator validity:" << std::endl;
+	std::cout << (it_foo == bar.begin()) << std::endl;
+	std::cout << (it_bar == foo_sw.begin()) << std::endl;
+	
+	// BOUNDS
+	std::list<T10>		lstb;
+	
+	lst_size = 10;
+	for (unsigned int i = 0; i < lst_size; ++i)
+		lstb.push_back(T10(i + 1, (i + 1) * 3));
+		
+	ft::map<T1, T9>		mpb(lstb.begin(), lstb.end());
+	
+	printSize(mpb);
+	ft_const_bound(mpb, -10);
+	ft_const_bound(mpb, 1);
+	ft_const_bound(mpb, 5);
+	ft_const_bound(mpb, 10);
+	ft_const_bound(mpb, 50);
+	printSize(mpb);
+	mpb.lower_bound(3)->second = 404;
+	mpb.upper_bound(7)->second = 842;
+	ft_bound(mpb, 5);
+	ft_bound(mpb, 7);
+	printSize(mpb);
+
+	// TRICKY
+	// std::list<T3>			lst_tricky;
+	// std::list<T3>::iterator itlst_tricky;
+// 
+	// lst_tricky.push_back(T3(42, "lol"));
+	// lst_tricky.push_back(T3(50, "mdr"));
+	// lst_tricky.push_back(T3(35, "funny"));
+	// lst_tricky.push_back(T3(45, "bunny"));
+	// lst_tricky.push_back(T3(21, "fizz"));
+	// lst_tricky.push_back(T3(35, "this key is already inside"));
+	// lst_tricky.push_back(T3(55, "fuzzy"));
+	// lst_tricky.push_back(T3(38, "buzz"));
+	// lst_tricky.push_back(T3(55, "inside too"));
+// 
+	// std::cout << "List contains: " << lst_tricky.size() << " elements." << std::endl;
+	// for (itlst_tricky = lst_tricky.begin(); itlst_tricky != lst_tricky.end(); ++itlst_tricky)
+		// printPair(itlst_tricky);
+	// std::cout << "---------------------------------------------" << std::endl;
+// 
+	// ft::map<T1, T2>			mp(lst_tricky.begin(), lst_tricky.end());
+	// lst_tricky.clear();
+// 
+	// printSize(mp);
+
+
 	// getwchar();
 	if (CHOICE)
 		std::cout << "std (C0)" << std::endl;

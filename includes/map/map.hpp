@@ -15,6 +15,7 @@
 #include "tools/nodes.hpp"
 #include "tools/exceptions.hpp"
 #include "iterator/iterator.hpp"
+#include <list>
 
 namespace ft {
 
@@ -41,15 +42,30 @@ namespace ft {
 
 			class value_compare {
 				public:
+					value_compare(Compare comp) : comp(comp) {}
 					bool operator()(const value_type& lhs, const value_type& rhs) const {
 						return comp(lhs.first, rhs.first);
 					}
-					value_compare(Compare comp) : comp(comp) {}
 
 				private:
 					Compare comp;
 			};
-
+// class value_compare : public std::binary_function<value_type, value_type, bool>
+		// {
+			// friend class map;
+			// public :
+				// typedef bool							result_type;
+				// typedef value_type						first_argument_type;
+				// typedef value_type						second_argument_type;
+// 
+				// bool operator()(const value_type& lhs, const value_type& rhs) const {
+					// return _comp(lhs.first, rhs.first);
+				// }
+			// protected :
+// 
+				// value_compare(Compare c) : _comp(c) {}
+				// Compare _comp;
+		// };
 			class MapIterator : public ft::iterator<bidirectional_iterator_tag, T>
 			{
 				public :
@@ -171,10 +187,9 @@ namespace ft {
 		}
 
 		// OPERATOR
-		map&		operator=(const map& other) {
+		map&			operator=(const map& other) {
 			if (this != &other) {
 				clear();
-				_alloc = Alloc();
 				if (other.size() > 0) {
 					insert(other.begin(), other.end());
 					_root->set_color(BLACK);
@@ -183,26 +198,26 @@ namespace ft {
 			return *this;
 		}
 		// GETTEUR
-		allocator_type get_allocator() const {
+		allocator_type	get_allocator() const {
 			return _alloc;
 		}
 	
 		// ELEMENT ACCESS
-		T&			at(const Key& key) {
+		T&				at(const Key& key) {
 			nodePtr		tmp = _find(key);
 
 			if (!tmp)
 				std::out_of_range("");
 			return (tmp->get_value()->second);
 		}
-		const T&	at(const Key& key) const {
+		const T&		at(const Key& key) const {
 			nodePtr		tmp = _find(key);
 
 			if (!tmp)
 				std::out_of_range("");
 			return (tmp->get_value()->second);
 		}
-		T&			operator[](const Key& key) {
+		T&				operator[](const Key& key) {
 			nodePtr		tmp = _find(key);
 
 			if (!tmp) {
@@ -214,20 +229,31 @@ namespace ft {
 
 		// ITERATOR
 
-		iterator begin() { return iterator(_begin()); }
-		const_iterator begin() const { return const_iterator(reinterpret_cast<nodePtr>(_begin())); }
-		iterator end() { return iterator(_end()); }
-		const_iterator end() const { return const_iterator(reinterpret_cast<nodePtr>(_end())); }
-		reverse_iterator rbegin() { return reverse_iterator(_end()); }
-		const_reverse_iterator rbegin() const { return const_reverse_iterator(rbegin()); }
-		reverse_iterator rend() { return reverse_iterator(_begin()); }
-		const_reverse_iterator rend() const { return const_reverse_iterator(rend()); }
+		iterator				begin() { return iterator(_begin()); }
+		const_iterator			begin() const { return const_iterator(reinterpret_cast<nodePtr>(_begin())); }
+		iterator				end() { return iterator(_end()); }
+		const_iterator			end() const { return const_iterator(reinterpret_cast<nodePtr>(_end())); }
+		reverse_iterator		rbegin() { return reverse_iterator(_end()); }
+		const_reverse_iterator	rbegin() const { return const_reverse_iterator(rbegin()); }
+		reverse_iterator		rend() { return reverse_iterator(_begin()); }
+		const_reverse_iterator	rend() const { return const_reverse_iterator(rend()); }
 
 		// CAPACITY
 		bool empty() const { return (!_size); }
 		size_type size() const { return _size; }
-		size_type max_size() const { return (_alloc.max_size() / 2); }
+		size_type max_size() const { return (_alloc.max_size() >> 1); }
+
 		// MODIFIERS
+		void		clear() {
+			erase(begin(), end());
+		}
+		// void clear() {
+			// printBT(_root);
+			// _clear_tree(_root);
+			// _root = NULL;
+			// _size = 0;
+		// }
+
 		// INSERT
 		ft::pair<iterator, bool>	insert(const value_type& value) {
 			nodePtr		tmp = _find(value.first);
@@ -250,28 +276,19 @@ namespace ft {
 			res = insert(value);
 			return res.first;
 		}
-		// {
-			// static_cast<void>(pos);
-			// res = insert(value);
-			// return res.first;
-		// }
 		template<class InputIt>
 		void insert(InputIt first, typename ft::enable_if<!is_integral<InputIt>::value, InputIt>::type last) {
-			while(first != last) {
+			while (first != last) {
 				insert(*first);
 				first++;
 			}
 		}
 		
-		// ERASE && SWAP && CLEAR
-		void erase(iterator pos) {
-			// std::cout << "\e[32m" << "cest la nan ?" << "\e[0m" << std::endl;
-			if (_size > 1) {
-				// std::cout << "\e[31m" << "la !" << "\e[0m" << std::endl;
+		// ERASE && SWAP
+		void	erase(iterator pos) {
+			if (_size > 1)
 				_delete(pos, _find(pos->first));
-			}
 			else {
-				// std::cout << "\e[31m" << "ici!" << "\e[0m" << std::endl;
 				_alloc.destroy(_root->get_value());
 				_alloc.deallocate(_root->get_value(), 1);
 				delete _root;
@@ -279,21 +296,18 @@ namespace ft {
 			}
 			_size--;
 		}
-		void erase(iterator first, iterator last) {
+		void	erase(iterator first, iterator last) {
 			iterator	next = first;
 			iterator	now;
 			
-			// std::cout << "\e[31m" << "ou ici ?" << "\e[0m" << std::endl;
 			while (next != last) {
 				now = first;
 				++first;
 				next = first;
 				erase(now);
-				// std::cout << "\e[32m" << "ah" << "\e[0m";
 			}
-			// std::cout << std::endl;
 		}
-		size_type erase(const key_type& key) {
+		size_type	erase(const key_type& key) {
 			nodePtr		old_node = _find(key);
 
 			if (!old_node)
@@ -309,7 +323,7 @@ namespace ft {
 			_size--;
 			return 1;
 		}
-		void swap(map& rhs) {
+		void		swap(map& rhs) {
 			nodePtr		tmp_root;
 			size_type	tmp_size;
 
@@ -320,32 +334,65 @@ namespace ft {
 			_size = rhs._size;
 			rhs._size = tmp_size;
 		}
-		void clear() {
-			erase(begin(), end());
-		}
-		// void clear() {
-			// printBT(_root);
-			// _clear_tree(_root);
-			// _root = NULL;
-			// _size = 0;
-		// }
 
 		// LOOK UP
-		// size_type count(const Key& key) const {}
-		// iterator find(const Key& key) {}
-		// const_iterator find(const Key& key) const {}
-		// std::pair<iterator,iterator> equal_range(const Key& key) {}
-		// std::pair<const_iterator,const_iterator> equal_range(const Key& key) const {}
-		// iterator lower_bound(const Key& key) {}
-		// const_iterator lower_bound(const Key& key) const {}
-		// iterator upper_bound(const Key& key) {}
-		// const_iterator upper_bound(const Key& key) const {}
+		size_type	count(const Key& key) const {
+			if (_find(key))
+				return 1;
+			return 0;
+		}
+		iterator	find(const Key& key) {
+			nodePtr		tmp = _find(key);
+
+			if (tmp)
+				return (iterator(tmp));
+			else
+				return end();
+		}
+		const_iterator	find(const Key& key) const {
+			nodePtr		tmp = _find(key);
+			
+			if (tmp)
+				return (const_iterator(tmp));
+			else
+				return end();
+		}
+		ft::pair<iterator,iterator>				equal_range(const Key& key) {
+			return (ft::make_pair<iterator, iterator>(lower_bound(key), upper_bound(key)));
+		}
+		ft::pair<const_iterator,const_iterator>	equal_range(const Key& key) const {
+			return (ft::make_pair<const_iterator, const_iterator>(lower_bound(key), upper_bound(key)));
+		}
+		iterator		lower_bound(const Key& key) {
+			for (iterator it = begin(); it != end(); it++)
+				if (!this->key_comp()(it->first, key))
+					return (it);
+			return (end());
+		}
+		const_iterator	lower_bound(const Key& key) const {
+			for (const_iterator it = begin(); it != end(); it++)
+				if (!this->key_comp()(it->first, key))
+					return (it);
+			return (end());
+		}
+		iterator		upper_bound(const Key& key) {
+			for (iterator it = begin(); it != end(); it++)
+				if (this->key_comp()(key, it->first))
+					return (it);
+			return (end());
+		}
+		const_iterator	upper_bound(const Key& key) const {
+			for (const_iterator it = begin(); it != end(); it++)
+				if (this->key_comp()(key, it->first))
+					return (it);
+			return (end());
+		}
 
 		// OBSERVERS
-		key_compare key_comp(void) const {
+		key_compare		key_comp(void) const {
 			return key_compare(_comp);
 		}
-		value_compare value_comp(void) const {
+		value_compare	value_comp(void) const {
 			return _comp;
 		}
 
@@ -355,36 +402,40 @@ namespace ft {
 				return;
 			_clear_tree(node->get_child(LEFT));
 			_clear_tree(node->get_child(RIGHT));
-			// delete node;
 			std::allocator<nodeType>().deallocate(node, 1);
 			_size--;
 		}
 		nodePtr		_end() const {
 			nodePtr		tmp = _root;
-			while(tmp->get_child(RIGHT))
+
+			while (tmp->get_child(RIGHT))
 				tmp = tmp->get_child(RIGHT);
 			return tmp;
 		}
 		nodePtr		_begin() const {
 			nodePtr		tmp = _root;
-			while(tmp->get_child(LEFT) && tmp->get_child(LEFT)->get_value())
+
+			while (tmp->get_child(LEFT) && tmp->get_child(LEFT)->get_value())
 				tmp = tmp->get_child(LEFT);
 			return tmp;
 		}
 		nodePtr		_rend() const {
 			nodePtr		tmp = _root;
-			while(tmp->get_child(RIGHT) && tmp->get_child(RIGHT)->get_value())
+
+			while (tmp->get_child(RIGHT) && tmp->get_child(RIGHT)->get_value())
 				tmp = tmp->get_child(RIGHT);
 			return tmp;
 		}
 		nodePtr		_rbegin() const {
 			nodePtr		tmp = _root;
-			while(tmp->get_child(LEFT))
+
+			while (tmp->get_child(LEFT))
 				tmp = tmp->get_child(LEFT);
 			return tmp;
 		}
 		nodePtr		_find(key_type key) const {
 			nodePtr		tmp = _root;
+
 			bool					dir;
 
 			while (tmp && tmp->get_value()) {
@@ -432,30 +483,30 @@ namespace ft {
 				}
 			}
 		}
-		void	_red_black(nodePtr elem) {
+		void	_red_black(nodePtr node) {
 			bool		dir = LEFT;
 			nodePtr		uncle;
 	
-			if (_root == elem) {
-				elem->set_color(BLACK);
+			if (_root == node) {
+				node->set_color(BLACK);
 				return ;
 			}
-			while(elem != _root && elem->get_parent()->get_color() == RED) {
-				uncle = elem->get_uncle();
-				dir = elem->get_parent()->get_side();
+			while (node != _root && node->get_parent()->get_color() == RED) {
+				uncle = node->get_uncle();
+				dir = node->get_parent()->get_side();
 				if (uncle && uncle->get_color() == RED) {
-					elem->get_parent()->set_color(BLACK);
+					node->get_parent()->set_color(BLACK);
 					uncle->set_color(BLACK);
 					uncle->get_parent()->set_color(RED);
-					elem = elem->get_grand_parent();
-				} else if (elem->get_side() == !dir) {
-					elem = elem->get_parent();
-					_rotate(elem, dir);
+					node = node->get_grand_parent();
+				} else if (node->get_side() == !dir) {
+					node = node->get_parent();
+					_rotate(node, dir);
 				} else {
-					elem->get_parent()->set_color(BLACK);
-					elem->get_grand_parent()->set_color(RED);
-					elem = elem->get_grand_parent();
-					_rotate(elem, !dir);
+					node->get_parent()->set_color(BLACK);
+					node->get_grand_parent()->set_color(RED);
+					node = node->get_grand_parent();
+					_rotate(node, !dir);
 				}
 				_root->set_color(BLACK);
 			}
