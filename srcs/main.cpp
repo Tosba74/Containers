@@ -6,10 +6,11 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:08:16 by bmangin           #+#    #+#             */
-/*   Updated: 2022/10/05 22:50:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 16:52:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <wchar.h>
 #include <iostream>
 #include <string>
 #include <deque>
@@ -36,6 +37,7 @@ typedef ft::map<T1, T2>::value_type	T4;
 typedef ft::map<T1, T2>::iterator	iterator;
 typedef ft::pair<const T1, T2>		T5;
 typedef ft::pair<const T3, T1>		T6;
+typedef ft::pair<const T1, T1>		T7;
 
 // static int g_index = 0;
 /*
@@ -125,7 +127,7 @@ void	ft_erase(MAP &mp, U param) {
 
 template <typename MAP, typename U, typename V>
 void	ft_erase(MAP &mp, U param, V param2) {
-	mp.erase(param, param2);
+  mp.erase(param, param2);
 	printSize(mp);
 }
 template <typename MAP, typename U>
@@ -243,15 +245,15 @@ int		main(void)
 	printSize(mp5);
 
 	for (int i = 2; i < 4; ++i)
-		ft_erase(mp5, i);
-	ft_erase(mp5, mp5.begin()->first);
-	ft_erase(mp5, (--mp5.end())->first);
+		ft_erase2(mp5, i);
+	ft_erase2(mp5, mp5.begin()->first);
+	ft_erase2(mp5, (--mp5.end())->first);
 	mp5[-1] = "Hello";
 	mp5[10] = "Hi there";
 	mp5[10] = "Hi there";
 	printSize(mp5);
-	ft_erase(mp5, 0);
-	ft_erase(mp5, 1);
+	ft_erase2(mp5, 0);
+	ft_erase2(mp5, 1);
 
 	// EMPTY
 	std::list<T6> lst5;
@@ -279,6 +281,44 @@ int		main(void)
 	printSize(mp7);	
 	std::cout << "\e[31m" << "Arthoun!" << "\e[0m" << std::endl;
 
+	// CONSTRUCT COPY
+	std::list<T7> lst6;
+	lst_size = 7;
+	for (unsigned int i = 0; i < lst_size; ++i)
+		lst6.push_back(T7(lst_size - i, i));
+
+	ft::map<T1, T1>					mp8(lst6.begin(), lst6.end());
+	ft::map<T1, T1>::iterator		it2 = mp8.begin();
+	ft::map<T1, T1>::iterator		it2e = mp8.end();
+	ft::map<T1, T1>				mp8_range(it2, --(--it2e));
+
+	for (int i = 0; it2 != it2e; ++it2)
+		it2->second = ++i * 5;
+
+	it2 = mp8.begin();
+	it2e = --(--mp8.end());
+	
+	ft::map<T1, T1> mp8_copy(mp8);
+	for (int i = 0; it2 != it2e; ++it2)
+		it2->second = ++i * 7;
+
+	std::cout << "\t-- PART ONE --" << std::endl;
+	printSize(mp8);
+	printSize(mp8_range);
+	printSize(mp8_copy);
+
+	mp8 = mp8_copy;
+	mp8_copy = mp8_range;
+	mp8_range.clear();
+
+	std::cout << "\t-- PART TWO --" << std::endl;
+	printSize(mp8);
+	printSize(mp8_range);
+	printSize(mp8_copy);
+	
+	// CONSTRUCT COPY
+	
+	// getwchar();
 	if (CHOICE)
 		std::cout << "std (C0)" << std::endl;
 	else

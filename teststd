@@ -263,4 +263,210 @@ max_size: 288230376151711743
 
 Content is:
 ###############################################
+size: 6
+max_size: 288230376151711743
+
+Content is:
+- key: 0 | value: AAAAAA
+- key: 1 | value: BBBBB
+- key: 2 | value: CCCC
+- key: 3 | value: DDD
+- key: 4 | value: EE
+- key: 5 | value: F
+###############################################
+ret: 1
+size: 5
+max_size: 288230376151711743
+
+Content is:
+- key: 0 | value: AAAAAA
+- key: 1 | value: BBBBB
+- key: 3 | value: DDD
+- key: 4 | value: EE
+- key: 5 | value: F
+###############################################
+ret: 1
+size: 4
+max_size: 288230376151711743
+
+Content is:
+- key: 0 | value: AAAAAA
+- key: 1 | value: BBBBB
+- key: 4 | value: EE
+- key: 5 | value: F
+###############################################
+ret: 1
+size: 3
+max_size: 288230376151711743
+
+Content is:
+- key: 1 | value: BBBBB
+- key: 4 | value: EE
+- key: 5 | value: F
+###############################################
+ret: 1
+size: 2
+max_size: 288230376151711743
+
+Content is:
+- key: 1 | value: BBBBB
+- key: 4 | value: EE
+###############################################
+size: 4
+max_size: 288230376151711743
+
+Content is:
+- key: -1 | value: Hello
+- key: 1 | value: BBBBB
+- key: 4 | value: EE
+- key: 10 | value: Hi there
+###############################################
+ret: 0
+size: 4
+max_size: 288230376151711743
+
+Content is:
+- key: -1 | value: Hello
+- key: 1 | value: BBBBB
+- key: 4 | value: EE
+- key: 10 | value: Hi there
+###############################################
+ret: 1
+size: 3
+max_size: 288230376151711743
+
+Content is:
+- key: -1 | value: Hello
+- key: 4 | value: EE
+- key: 10 | value: Hi there
+###############################################
+is_empty: 0
+size: 15
+max_size: 461168601842738790
+
+Content is:
+- key: a | value: 15
+- key: b | value: 14
+- key: c | value: 13
+- key: d | value: 12
+- key: e | value: 11
+- key: f | value: 10
+- key: g | value: 9
+- key: h | value: 8
+- key: i | value: 7
+- key: j | value: 6
+- key: k | value: 5
+- key: l | value: 4
+- key: m | value: 3
+- key: n | value: 2
+- key: o | value: 1
+###############################################
+is_empty: 1
+is_empty: 0
+[31mWoueshhh![0m
+size: 15
+max_size: 461168601842738790
+
+Content is:
+- key: a | value: 21
+- key: b | value: 28
+- key: c | value: 35
+- key: d | value: 42
+- key: e | value: 49
+- key: f | value: 56
+- key: g | value: 63
+- key: h | value: 70
+- key: i | value: 77
+- key: j | value: 84
+- key: k | value: 91
+- key: l | value: 98
+- key: m | value: 3
+- key: n | value: 2
+- key: o | value: 1
+###############################################
+[31mArthoun![0m
+size: 15
+max_size: 461168601842738790
+
+Content is:
+- key: a | value: 15
+- key: b | value: 14
+- key: c | value: 13
+- key: d | value: 12
+- key: e | value: 11
+- key: f | value: 10
+- key: g | value: 9
+- key: h | value: 8
+- key: i | value: 7
+- key: j | value: 6
+- key: k | value: 5
+- key: l | value: 4
+- key: m | value: 3
+- key: n | value: 2
+- key: o | value: 1
+###############################################
+[31mArthoun![0m
+	-- PART ONE --
+size: 7
+max_size: 461168601842738790
+
+Content is:
+- key: 1 | value: 7
+- key: 2 | value: 14
+- key: 3 | value: 21
+- key: 4 | value: 28
+- key: 5 | value: 35
+- key: 6 | value: 1
+- key: 7 | value: 0
+###############################################
+size: 5
+max_size: 461168601842738790
+
+Content is:
+- key: 1 | value: 6
+- key: 2 | value: 5
+- key: 3 | value: 4
+- key: 4 | value: 3
+- key: 5 | value: 2
+###############################################
+size: 7
+max_size: 461168601842738790
+
+Content is:
+- key: 1 | value: 5
+- key: 2 | value: 10
+- key: 3 | value: 15
+- key: 4 | value: 20
+- key: 5 | value: 25
+- key: 6 | value: 1
+- key: 7 | value: 0
+###############################################
+	-- PART TWO --
+size: 7
+max_size: 461168601842738790
+
+Content is:
+- key: 1 | value: 5
+- key: 2 | value: 10
+- key: 3 | value: 15
+- key: 4 | value: 20
+- key: 5 | value: 25
+- key: 6 | value: 1
+- key: 7 | value: 0
+###############################################
+size: 0
+max_size: 461168601842738790
+
+Content is:
+###############################################
+size: 5
+max_size: 461168601842738790
+
+Content is:
+- key: 1 | value: 6
+- key: 2 | value: 5
+- key: 3 | value: 4
+- key: 4 | value: 3
+- key: 5 | value: 2
+###############################################
 std (C0)

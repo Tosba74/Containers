@@ -147,13 +147,12 @@ namespace ft {
 			_root = new nodeType();
 		}
 		template <class InputIterator>
-		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-			const allocator_type& alloc = allocator_type()) : _size(0), _alloc(alloc), _comp(comp) {
+		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+			: _size(0), _alloc(alloc), _comp(comp) {
 			_root = new nodeType();
 			insert(first, last);
 		}
-		map(const map& other)
-			: _root(NULL), _size(0), _alloc(other._alloc), _comp(other._comp) {
+		map(const map& other) : _root(NULL), _size(0) {
 			_root = new nodeType();
 			*this = other;
 		}
@@ -162,13 +161,27 @@ namespace ft {
 
 		~map(void) {
 			// std::cout << _root->get_value()->first << std::endl;
-			printBT(_root);
+			// printBT(_root);
 			if (_size)
 				clear();
-			// delete _root;
-			std::cout << "\e[34m" << "miracle !" << "\e[0m" << std::endl; 
+			if (_root) 
+				delete _root;
+				
+			// std::cout << "\e[34m" << "miracle !" << "\e[0m" << std::endl; 
 		}
 
+		// OPERATOR
+		map&		operator=(const map& other) {
+			if (this != &other) {
+				clear();
+				_alloc = Alloc();
+				if (other.size() > 0) {
+					insert(other.begin(), other.end());
+					_root->set_color(BLACK);
+				}
+			}
+			return *this;
+		}
 		// GETTEUR
 		allocator_type get_allocator() const {
 			return _alloc;
@@ -252,9 +265,13 @@ namespace ft {
 		
 		// ERASE && SWAP && CLEAR
 		void erase(iterator pos) {
-			if (_size > 1)
+			// std::cout << "\e[32m" << "cest la nan ?" << "\e[0m" << std::endl;
+			if (_size > 1) {
+				// std::cout << "\e[31m" << "la !" << "\e[0m" << std::endl;
 				_delete(pos, _find(pos->first));
+			}
 			else {
+				// std::cout << "\e[31m" << "ici!" << "\e[0m" << std::endl;
 				_alloc.destroy(_root->get_value());
 				_alloc.deallocate(_root->get_value(), 1);
 				delete _root;
@@ -266,15 +283,15 @@ namespace ft {
 			iterator	next = first;
 			iterator	now;
 			
-			std::cout << "\e[31m" << "ou ici ?" << "\e[0m" << std::endl;
+			// std::cout << "\e[31m" << "ou ici ?" << "\e[0m" << std::endl;
 			while (next != last) {
 				now = first;
 				++first;
 				next = first;
 				erase(now);
-				std::cout << "\e[32m" << "ah" << "\e[0m";
+				// std::cout << "\e[32m" << "ah" << "\e[0m";
 			}
-		std::cout << std::endl;
+			// std::cout << std::endl;
 		}
 		size_type erase(const key_type& key) {
 			nodePtr		old_node = _find(key);
@@ -307,6 +324,7 @@ namespace ft {
 			erase(begin(), end());
 		}
 		// void clear() {
+			// printBT(_root);
 			// _clear_tree(_root);
 			// _root = NULL;
 			// _size = 0;
@@ -324,6 +342,12 @@ namespace ft {
 		// const_iterator upper_bound(const Key& key) const {}
 
 		// OBSERVERS
+		key_compare key_comp(void) const {
+			return key_compare(_comp);
+		}
+		value_compare value_comp(void) const {
+			return _comp;
+		}
 
 	private:
 		void		_clear_tree(nodePtr node) {
@@ -476,7 +500,7 @@ namespace ft {
 		}
 		void	_delete(iterator del_it, nodePtr del_node)
 		{
-			nodePtr	x;
+			nodePtr					x;
 			bool					dir;
 			bool					y_original_color = del_node->get_color();
 
@@ -516,20 +540,21 @@ namespace ft {
 			if (y_original_color == BLACK)
 				_correct(x);
 		}
+		void printBT(const nodePtr n) {
+			std::cout << "\e[34m" << "size: " << _size << " | val_root: " << *_root << "\e[0m" << std::endl;
+		    printBT("", n, false);
+		}
 		void    printBT(const std::string& prefix, const nodePtr n, bool isLeft) {
 		    if (n && n->get_value()) {
 		        std::cout << prefix << (isLeft ? "├──" : "└──" );
 		        if (n->get_color())
 		            std::cout << "\e[31m";
-		        std::cout << *n << "\e[0m" << std::endl;
+				if (n)
+		        	std::cout << *n << "\e[0m" << std::endl;
 
 		        printBT( prefix + (isLeft ? "│   " : "    "), n->get_child(LEFT), true);
 		        printBT( prefix + (isLeft ? "│   " : "    "), n->get_child(RIGHT), false);
 		    }
-		}
-		void printBT(const nodePtr n) {
-			std::cout << "\e[34m" << "size :" << _size << " | val_root :" << *_root << "\e[0m" << std::endl;
-		    printBT("", n, false);
 		}
 	};
 

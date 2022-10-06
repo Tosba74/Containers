@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 02:47:11 by bmangin           #+#    #+#             */
-/*   Updated: 2022/10/05 22:41:42 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:54:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,19 @@ namespace ft {
 	
 	template<class T>
 	std::ostream& operator<<(std::ostream& o, const node<T> &n) {
-  		if (n.get_color())
-       		o << "\e[34m";
+		// std::cerr << "THIS n IS:";
+		// std::cerr << n.get_value()->first;
+		if (!n.get_value()) {
+			return o;
+		}
+  	if (n.get_color())
+       		o << "\e[31m";
+		else
+       		o << "\e[32m";
 		if (n.get_value()->first)
     		o << n.get_value()->first << "\e[0m";
 		else
-			o << "\e[31m" << "X";
+			o << "\e[33m" << "X";
     	return o;
 	}
 
