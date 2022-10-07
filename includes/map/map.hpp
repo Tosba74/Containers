@@ -16,6 +16,7 @@
 #include "tools/exceptions.hpp"
 #include "iterator/iterator.hpp"
 #include <list>
+#include <memory>
 
 namespace ft {
 
@@ -163,12 +164,12 @@ namespace ft {
 			_root = new nodeType();
 		}
 		template <class InputIterator>
-		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+		map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = Alloc())
 			: _size(0), _alloc(alloc), _comp(comp) {
 			_root = new nodeType();
 			insert(first, last);
 		}
-		map(const map& other) : _root(NULL), _size(0) {
+		map(const map& other) : _root(NULL), _size(0), _alloc(other._alloc), _comp(other._comp) {
 			_root = new nodeType();
 			*this = other;
 		}
@@ -241,7 +242,9 @@ namespace ft {
 		// CAPACITY
 		bool empty() const { return (!_size); }
 		size_type size() const { return _size; }
-		size_type max_size() const { return (_alloc.max_size() >> 1); }
+		size_type max_size() const {
+			return _alloc.max_size();
+		}
 
 		// MODIFIERS
 		void		clear() {

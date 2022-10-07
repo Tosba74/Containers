@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 08:11:56 by bmangin           #+#    #+#              #
-#    Updated: 2022/10/06 19:30:31 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2022/10/07 00:18:20 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,8 @@ CCFS				:= ${CC} ${FLAGS} ${INC} ${FS}
 
 RM					:= rm -rf
 
+DEBUG				:= debug.out
+
 # ******************************   MAKE SHIT   ******************************* #
 
 all: crea_b ${NAME}
@@ -82,13 +84,16 @@ see_var:
 	@ echo ${OBJS}
 
 ${NAME}: ${OBJS}
-	${CCFS} -o ${NAME} ${OBJS}
+	${CCF} -o ${NAME} ${OBJS}
 	
 fs: ${OBJS}
 	${CCFS} -o ${NAME} ${OBJS}
 	
 ${PATH_B}/%.o: %.cpp ${INCS}
-	${CCFS} -o $@ -c $<
+	${CCF} -o $@ -c $<
+	
+debug: crea_b $(OBJECTS)
+	$(CCFS) -o $(PATH_B)/$(DEBUG) $(OBJS)	
 	
 crea_b:
 	${shell mkdir -p ${PATH_B}}	

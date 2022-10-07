@@ -1,7 +1,7 @@
 insert return: key: 42 | value: lol
 Created new node: 1
 size: 1
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 42 | value: lol
@@ -9,7 +9,7 @@ Content is:
 insert return: key: 42 | value: lol
 Created new node: 0
 size: 1
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 42 | value: lol
@@ -17,7 +17,7 @@ Content is:
 insert return: key: 50 | value: mdr
 Created new node: 1
 size: 2
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 42 | value: lol
@@ -26,7 +26,7 @@ Content is:
 insert return: key: 35 | value: funny
 Created new node: 1
 size: 3
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 35 | value: funny
@@ -36,7 +36,7 @@ Content is:
 insert return: key: 45 | value: bunny
 Created new node: 1
 size: 4
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 35 | value: funny
@@ -47,7 +47,7 @@ Content is:
 insert return: key: 21 | value: fizz
 Created new node: 1
 size: 5
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 21 | value: fizz
@@ -59,7 +59,7 @@ Content is:
 insert return: key: 38 | value: buzz
 Created new node: 1
 size: 6
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 21 | value: fizz
@@ -71,7 +71,7 @@ Content is:
 ###############################################
 insert return: key: 55 | value: fuzzy
 size: 7
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 21 | value: fizz
@@ -84,14 +84,14 @@ Content is:
 ###############################################
 insert return: key: 1337 | value: beauty
 size: 1
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 1337 | value: beauty
 ###############################################
 insert return: key: 1000 | value: Hello
 size: 2
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 1000 | value: Hello
@@ -99,7 +99,7 @@ Content is:
 ###############################################
 insert return: key: 1500 | value: World
 size: 3
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 1000 | value: Hello
@@ -115,7 +115,7 @@ key: 21 | value: fizz
 key: 38 | value: buzz
 key: 55 | value: fuzzy
 size: 7
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 21 | value: fizz
@@ -135,7 +135,7 @@ key: 1 | value: surprising isnt it?
 key: 100 | value: is it enough??
 key: 55 | value: inside map too
 size: 7
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 21 | value: fizz
@@ -147,7 +147,7 @@ Content is:
 - key: 55 | value: fuzzy
 ###############################################
 size: 12
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 1 | value: surprising isnt it?
@@ -164,7 +164,7 @@ Content is:
 - key: 100 | value: is it enough??
 ###############################################
 size: 10
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 0 | value: AAAAAAAAAA
@@ -179,7 +179,7 @@ Content is:
 - key: 9 | value: J
 ###############################################
 size: 9
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 0 | value: AAAAAAAAAA
@@ -193,7 +193,7 @@ Content is:
 - key: 9 | value: J
 ###############################################
 size: 8
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 2 | value: CCCCCCCC
@@ -206,7 +206,7 @@ Content is:
 - key: 9 | value: J
 ###############################################
 size: 7
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 2 | value: CCCCCCCC
@@ -218,7 +218,7 @@ Content is:
 - key: 8 | value: II
 ###############################################
 size: 4
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 5 | value: FFFFF
@@ -227,14 +227,14 @@ Content is:
 - key: 8 | value: II
 ###############################################
 size: 2
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 5 | value: FFFFF
 - key: 8 | value: II
 ###############################################
 size: 4
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 5 | value: FFFFF
@@ -243,13 +243,13 @@ Content is:
 - key: 11 | value: Hi there
 ###############################################
 size: 1
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 5 | value: FFFFF
 ###############################################
 size: 5
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 5 | value: FFFFF
@@ -259,12 +259,12 @@ Content is:
 - key: 15 | value: FOUR
 ###############################################
 size: 0
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 ###############################################
 size: 6
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 0 | value: AAAAAA
@@ -276,7 +276,7 @@ Content is:
 ###############################################
 ret: 1
 size: 5
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 0 | value: AAAAAA
@@ -287,7 +287,7 @@ Content is:
 ###############################################
 ret: 1
 size: 4
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 0 | value: AAAAAA
@@ -297,7 +297,7 @@ Content is:
 ###############################################
 ret: 1
 size: 3
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 1 | value: BBBBB
@@ -306,14 +306,14 @@ Content is:
 ###############################################
 ret: 1
 size: 2
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: 1 | value: BBBBB
 - key: 4 | value: EE
 ###############################################
 size: 4
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: -1 | value: Hello
@@ -323,7 +323,7 @@ Content is:
 ###############################################
 ret: 0
 size: 4
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: -1 | value: Hello
@@ -333,7 +333,7 @@ Content is:
 ###############################################
 ret: 1
 size: 3
-max_size: 288230376151711743
+max_size: 576460752303423487
 
 Content is:
 - key: -1 | value: Hello
@@ -342,7 +342,7 @@ Content is:
 ###############################################
 is_empty: 0
 size: 15
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: a | value: 15
@@ -365,7 +365,7 @@ is_empty: 1
 is_empty: 0
 [31mWoueshhh![0m
 size: 15
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: a | value: 21
@@ -386,7 +386,7 @@ Content is:
 ###############################################
 [31mArthoun![0m
 size: 15
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: a | value: 15
@@ -408,7 +408,7 @@ Content is:
 [31mArthoun![0m
 	-- PART ONE --
 size: 7
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: 1 | value: 7
@@ -420,7 +420,7 @@ Content is:
 - key: 7 | value: 0
 ###############################################
 size: 5
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: 1 | value: 6
@@ -430,7 +430,7 @@ Content is:
 - key: 5 | value: 2
 ###############################################
 size: 7
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: 1 | value: 5
@@ -443,7 +443,7 @@ Content is:
 ###############################################
 	-- PART TWO --
 size: 7
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: 1 | value: 5
@@ -455,12 +455,12 @@ Content is:
 - key: 7 | value: 0
 ###############################################
 size: 0
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 ###############################################
 size: 5
-max_size: 1152921504606846975
+max_size: 2305843009213693951
 
 Content is:
 - key: 1 | value: 6
@@ -470,7 +470,7 @@ Content is:
 - key: 5 | value: 2
 ###############################################
 size: 4
-max_size: 768614336404564650
+max_size: 1537228672809129301
 
 Content is:
 - key: a | value: 2.3
@@ -495,7 +495,7 @@ with [d and b]: key_comp: 0 | value_comp: 1
 with [d and c]: key_comp: 0 | value_comp: 1
 with [d and d]: key_comp: 0 | value_comp: 1
 size: 4
-max_size: 768614336404564650
+max_size: 1537228672809129301
 
 Content is:
 - key: a | value: 2.3
@@ -503,218 +503,439 @@ Content is:
 - key: c | value: 0.3
 - key: d | value: 4.2
 ###############################################
-size: 6
-max_size: 288230376151711743
+size: 31
+max_size: 576460752303423487
 
 Content is:
-- key: 90 | value: 8
-- key: 80 | value: hey
-- key: 42 | value: fgzgxfn
-- key: 27 | value: bee
-- key: 25 | value: funny
 - key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 24 | value: 345
+- key: 25 | value: funny
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 55 | value: fuzzy
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-size: 3
-max_size: 230584300921369395
+size: 30
+max_size: 576460752303423487
 
 Content is:
-- key: a | value: an element
-- key: b | value: old element
-- key: c | value: another element
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 24 | value: 345
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 55 | value: fuzzy
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-insert a new element via operator[]: 
-size: 4
-max_size: 230584300921369395
+size: 29
+max_size: 576460752303423487
 
 Content is:
-- key: a | value: an element
-- key: b | value: old element
-- key: c | value: another element
-- key: d | value: 
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 24 | value: 345
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-############### [0] ###############
-eq: 1 | ne: 0
-lt: 0 | le: 1
-gt: 0 | ge: 1
-############### [1] ###############
-eq: 1 | ne: 0
-lt: 0 | le: 1
-gt: 0 | ge: 1
-############### [2] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [3] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-############### [4] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-############### [5] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [6] ###############
-eq: 0 | ne: 1
-lt: 1 | le: 1
-gt: 0 | ge: 0
-############### [7] ###############
-eq: 0 | ne: 1
-lt: 0 | le: 0
-gt: 1 | ge: 1
-size: 5
-max_size: 1152921504606846975
+size: 28
+max_size: 576460752303423487
 
 Content is:
-- key: a | value: 7
-- key: b | value: 14
-- key: c | value: 21
-- key: d | value: 28
-- key: e | value: 35
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-1
-0
-key: a | value: 7
-key: b | value: 14
-TEST OFFSET
-key: a | value: 7
-key: b | value: 14
-[rev] key: e | value: 35
-[rev] key: d | value: 28
-[rev] key: c | value: 21
-[rev] key: b | value: 14
-[rev] key: a | value: 7
-printReverse:
--> key: e | value: 35
--> key: d | value: 28
--> key: c | value: 21
--> key: b | value: 14
--> key: a | value: 7
-_______________________________________________
-BEFORE SWAP
-foo contains:
-size: 7
-max_size: 1152921504606846975
+size: 27
+max_size: 576460752303423487
 
 Content is:
-- key: a | value: 7
-- key: b | value: 6
-- key: c | value: 5
-- key: d | value: 4
-- key: e | value: 3
-- key: f | value: 2
-- key: g | value: 1
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-bar contains:
-size: 4
-max_size: 1152921504606846975
+size: 26
+max_size: 576460752303423487
 
 Content is:
-- key: w | value: 15
-- key: x | value: 10
-- key: y | value: 5
-- key: z | value: 0
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-AFTER SWAP
-foo contains:
-size: 4
-max_size: 1152921504606846975
+size: 25
+max_size: 576460752303423487
 
 Content is:
-- key: w | value: 15
-- key: x | value: 10
-- key: y | value: 5
-- key: z | value: 0
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-bar contains:
-size: 7
-max_size: 1152921504606846975
+size: 24
+max_size: 576460752303423487
 
 Content is:
-- key: a | value: 7
-- key: b | value: 6
-- key: c | value: 5
-- key: d | value: 4
-- key: e | value: 3
-- key: f | value: 2
-- key: g | value: 1
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-Iterator validity:
-1
-1
-size: 10
-max_size: 768614336404564650
+size: 23
+max_size: 576460752303423487
 
 Content is:
-- key: 1 | value: 3
-- key: 2 | value: 6
-- key: 3 | value: 9
-- key: 4 | value: 12
-- key: 5 | value: 15
-- key: 6 | value: 18
-- key: 7 | value: 21
-- key: 8 | value: 24
-- key: 9 | value: 27
-- key: 10 | value: 30
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-with key [-10]:
-lower_bound: key: 1 | value: 3
-upper_bound: key: 1 | value: 3
-equal_range: 1
-with key [1]:
-lower_bound: key: 1 | value: 3
-upper_bound: key: 2 | value: 6
-equal_range: 1
-with key [5]:
-lower_bound: key: 5 | value: 15
-upper_bound: key: 6 | value: 18
-equal_range: 1
-with key [10]:
-lower_bound: key: 10 | value: 30
-upper_bound: end()
-equal_range: 1
-with key [50]:
-lower_bound: end()
-upper_bound: end()
-equal_range: 1
-size: 10
-max_size: 768614336404564650
+size: 22
+max_size: 576460752303423487
 
 Content is:
-- key: 1 | value: 3
-- key: 2 | value: 6
-- key: 3 | value: 9
-- key: 4 | value: 12
-- key: 5 | value: 15
-- key: 6 | value: 18
-- key: 7 | value: 21
-- key: 8 | value: 24
-- key: 9 | value: 27
-- key: 10 | value: 30
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
-with key [5]:
-lower_bound: key: 5 | value: 15
-upper_bound: key: 6 | value: 18
-equal_range: 1
-with key [7]:
-lower_bound: key: 7 | value: 21
-upper_bound: key: 8 | value: 842
-equal_range: 1
-size: 10
-max_size: 768614336404564650
+size: 21
+max_size: 576460752303423487
 
 Content is:
-- key: 1 | value: 3
-- key: 2 | value: 6
-- key: 3 | value: 404
-- key: 4 | value: 12
-- key: 5 | value: 15
-- key: 6 | value: 18
-- key: 7 | value: 21
-- key: 8 | value: 842
-- key: 9 | value: 27
-- key: 10 | value: 30
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+size: 20
+max_size: 576460752303423487
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+size: 19
+max_size: 576460752303423487
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+size: 18
+max_size: 576460752303423487
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+size: 17
+max_size: 576460752303423487
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 ft (C1)

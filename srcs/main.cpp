@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 12:08:16 by bmangin           #+#    #+#             */
-/*   Updated: 2022/10/06 23:30:35 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2022/10/07 01:16:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,12 @@ void	ft_erase2(MAP &mp, U param)
 	std::cout << "ret: " << mp.erase(param) << std::endl;
 	printSize(mp);
 }
+template <typename MAP>
+void	ft_erase_tricky(MAP &mp, const T1 param)
+{
+	mp.erase(param);
+	printSize(mp);
+}
 template <class T>
 void	is_empty(T const &mp) {
 	std::cout << "is_empty: " << mp.empty() << std::endl;
@@ -434,6 +440,7 @@ int		main(void)
 // 
 	// std::cout << (it_test != ite_test) << std::endl;
 	
+	/*
 	// MORE
 	ft_mp	mp_more;
 
@@ -490,14 +497,14 @@ int		main(void)
 	ft::map<T1, int>::const_reverse_iterator	crit_op(rit_op);
 	ft::map<T1, int>::const_reverse_iterator	crit_op_(it_op);
 	ft::map<T1, int>::const_reverse_iterator	crit_op_2(cit_op);
-
+*/
 	/* error expected
 	ft::map<T1, int>::reverse_iterator			rit_op_(crit_op);
 	ft::map<T1, int>::reverse_iterator			rit_op2(cit_op);
 	ft::map<T1, int>::iterator					it_op2(rit_op);
 	ft::map<T1, int>::const_iterator			cit_op2(crit_op);
 	*/
-	
+/*	
 	std::list<T6> lst_op;
 	unsigned int lst_op_size = 5;
 	for (unsigned int i = 0; i < lst_op_size; ++i)
@@ -586,31 +593,225 @@ int		main(void)
 	printSize(mpb);
 
 	// TRICKY
-	// std::list<T3>			lst_tricky;
-	// std::list<T3>::iterator itlst_tricky;
-// 
-	// lst_tricky.push_back(T3(42, "lol"));
-	// lst_tricky.push_back(T3(50, "mdr"));
-	// lst_tricky.push_back(T3(35, "funny"));
-	// lst_tricky.push_back(T3(45, "bunny"));
-	// lst_tricky.push_back(T3(21, "fizz"));
-	// lst_tricky.push_back(T3(35, "this key is already inside"));
-	// lst_tricky.push_back(T3(55, "fuzzy"));
-	// lst_tricky.push_back(T3(38, "buzz"));
-	// lst_tricky.push_back(T3(55, "inside too"));
-// 
-	// std::cout << "List contains: " << lst_tricky.size() << " elements." << std::endl;
-	// for (itlst_tricky = lst_tricky.begin(); itlst_tricky != lst_tricky.end(); ++itlst_tricky)
-		// printPair(itlst_tricky);
-	// std::cout << "---------------------------------------------" << std::endl;
-// 
-	// ft::map<T1, T2>			mp(lst_tricky.begin(), lst_tricky.end());
-	// lst_tricky.clear();
-// 
-	// printSize(mp);
+	std::list<T4>			lst_tricky;
+	std::list<T4>::iterator itlst_tricky;
 
+	lst_tricky.push_back(T4(42, "lol"));
+	lst_tricky.push_back(T4(50, "mdr"));
+	lst_tricky.push_back(T4(35, "funny"));
+	lst_tricky.push_back(T4(45, "bunny"));
+	lst_tricky.push_back(T4(21, "fizz"));
+	lst_tricky.push_back(T4(35, "this key is already inside"));
+	lst_tricky.push_back(T4(55, "fuzzy"));
+	lst_tricky.push_back(T4(38, "buzz"));
+	lst_tricky.push_back(T4(55, "inside too"));
 
+	std::cout << "List contains: " << lst_tricky.size() << " elements." << std::endl;
+	for (itlst_tricky = lst_tricky.begin(); itlst_tricky != lst_tricky.end(); ++itlst_tricky)
+		printPair(itlst_tricky);
+	std::cout << "---------------------------------------------" << std::endl;
+
+	ft::map<T1, T2>			mp_tricky(lst_tricky.begin(), lst_tricky.end());
+	lst_tricky.clear();
+
+	printSize(mp_tricky);
+*/
+	ft::map<T1, T2> mp_tricky2;
+
+	mp_tricky2[42] = "lol";
+
+	mp_tricky2[50] = "mdr";
+	mp_tricky2[25] = "funny";
+
+	mp_tricky2[46] = "bunny";
+	mp_tricky2[21] = "fizz";
+	mp_tricky2[30] = "buzz";
+	mp_tricky2[55] = "fuzzy";
+
+	mp_tricky2[18] = "bee";
+	mp_tricky2[23] = "coconut";
+	mp_tricky2[28] = "diary";
+	mp_tricky2[35] = "fiesta";
+	mp_tricky2[44] = "hello";
+	mp_tricky2[48] = "world";
+	mp_tricky2[53] = "this is a test";
+	mp_tricky2[80] = "hey";
+
+	mp_tricky2[12] = "no";
+	mp_tricky2[20] = "idea";
+	mp_tricky2[22] = "123";
+	mp_tricky2[24] = "345";
+	mp_tricky2[27] = "27";
+	mp_tricky2[29] = "29";
+	mp_tricky2[33] = "33";
+	mp_tricky2[38] = "38";
+
+	mp_tricky2[43] = "1";
+	mp_tricky2[45] = "2";
+	mp_tricky2[47] = "3";
+	mp_tricky2[49] = "4";
+	mp_tricky2[51] = "5";
+	mp_tricky2[54] = "6";
+	mp_tricky2[60] = "7";
+	mp_tricky2[90] = "8";
+
+	printSize(mp_tricky2);
+
+	/* A classic btree should give this:
+	 *                                      42
+	 *                     /                                            \
+	 *                    25                                            50
+	 *           /                 \                         /                       \
+	 *          21                 30                       46                       55
+	 *      /       \           /      \                /       \             /           \
+	 *     18       23        28        35            44         48         53             80
+	 *   /   \    /    \    /    \     /   \        /   \       /   \     /    \         /     \
+	 *  12   20  22    24  27    29  33    38     43    45    47    49   51    54       60      90
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 25); // right != NULL; left != NULL
+	ft_erase(mp_tricky2, 55); // right != NULL; left != NULL
+
+	/* After deleting 25 and 55, I would get:
+	 *                                      42
+	 *                     /                                            \
+	 *                    24                                            50
+	 *           /                 \                         /                      \
+	 *          21                 30                       46                      54
+	 *      /       \           /      \                /       \             /           \
+	 *     18       23        28        35            44         48         53             80
+	 *   /   \    /         /    \     /   \        /   \       /   \     /              /     \
+	 *  12   20  22        27    29  33    38     43    45    47    49   51             60      90
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 24); // right != NULL; left != NULL
+	ft_erase(mp_tricky2, 54); // right != NULL; left != NULL
+
+	/* After deleting 24 and 54, I would get:
+	 *                                      42
+	 *                     /                                            \
+	 *                    23                                            50
+	 *           /                 \                         /                      \
+	 *          21                 30                       46                      53
+	 *      /       \           /      \                /       \             /           \
+	 *     18       22        28        35            44         48         51             80
+	 *   /   \              /    \     /   \        /   \       /   \                    /     \
+	 *  12   20            27    29  33    38     43    45    47    49                  60      90
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 22); // right == NULL; left == NULL
+	ft_erase(mp_tricky2, 51); // right == NULL; left == NULL
+
+	ft_erase(mp_tricky2, 21); // right == NULL; left != NULL
+	ft_erase(mp_tricky2, 53); // right != NULL; left == NULL
+
+	/* After deleting 22, 51 and then 21, 53, I would get:
+	 *                                      42
+	 *                     /                                            \
+	 *                    23                                            50
+	 *           /                 \                         /                      \
+	 *          20                 30                       46                      80
+	 *      /                   /      \                /       \                /        \
+	 *     18                 28        35            44         48             60         90
+	 *   /                  /    \     /   \        /   \       /   \
+	 *  12                 27    29  33    38     43    45    47    49
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 20); // right == NULL; left != NULL
+
+	/* After deleting 20, I would get:
+	 *                                      42
+	 *                     /                                            \
+	 *                    23                                            50
+	 *           /                 \                         /                      \
+	 *          18                 30                       46                      80
+	 *      /                   /      \                /       \                /        \
+	 *     12                 28        35            44         48             60         90
+	 *                      /    \     /   \        /   \       /   \
+	 *                     27    29  33    38     43    45    47    49
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 23); // right != NULL; left != NULL
+
+	/* After deleting 23, I would get:
+	 *                                      42
+	 *                     /                                            \
+	 *                    18                                            50
+	 *           /                 \                         /                      \
+	 *          12                 30                       46                      80
+	 *                          /      \                /       \                /        \
+	 *                        28        35            44         48             60         90
+	 *                      /    \     /   \        /   \       /   \
+	 *                     27    29  33    38     43    45    47    49
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 42); // right != NULL; left != NULL; parent == NULL
+
+	/* After deleting 42, I would get:
+	 *                                      38
+	 *                     /                                            \
+	 *                    18                                            50
+	 *           /                 \                         /                      \
+	 *          12                 30                       46                      80
+	 *                          /      \                /       \                /        \
+	 *                        28        35            44         48             60         90
+	 *                      /    \     /            /   \       /   \
+	 *                     27    29  33           43    45    47    49
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 38); // right != NULL; left != NULL; parent == NULL
+
+	/* After deleting 38, I would get:
+	 *                                      35
+	 *                     /                                            \
+	 *                    18                                            50
+	 *           /                 \                         /                      \
+	 *          12                 30                       46                      80
+	 *                          /      \                /       \                /        \
+	 *                        28        33            44         48             60         90
+	 *                      /    \                  /   \       /   \
+	 *                     27    29               43    45    47    49
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 35); // right != NULL; left != NULL; parent == NULL
+
+	/* After deleting 35, I would get:
+	 *                                      33
+	 *                     /                                            \
+	 *                    18                                            50
+	 *           /                 \                         /                      \
+	 *          12                 30                       46                      80
+	 *                          /                       /       \                /        \
+	 *                        28                      44         48             60         90
+	 *                      /    \                  /   \       /   \
+	 *                     27    29               43    45    47    49
+	 *
+	 * */
+
+	ft_erase(mp_tricky2, 33); // right != NULL; left != NULL; parent == NULL
+
+	/* After deleting 33, I would get:
+	 *                                      30
+	 *                     /                                            \
+	 *                    18                                            50
+	 *           /                 \                         /                      \
+	 *          12                 28                       46                      80
+	 *                          /      \                /       \                /        \
+	 *                        27       29             44         48             60         90
+	 *                                              /   \       /   \
+	 *                                            43    45    47    49
+	 *
+	 * */
 	// getwchar();
+
 	if (CHOICE)
 		std::cout << "std (C0)" << std::endl;
 	else
