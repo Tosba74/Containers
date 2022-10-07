@@ -112,6 +112,7 @@ int main(void)
 	print_vct(iter_vct);
 	for (int i = 0; i < vsize; ++i)
 		itv[i] = (vsize - i) * 5;
+	print_vct(iter_vct);
 	prepost_incdec(iter_vct);
 	itv = itv + 5;
 	itv = itv - 4;
